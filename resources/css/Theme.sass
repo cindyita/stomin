@@ -1,0 +1,173 @@
+/*----------INITIALIZE STYLES----------*/
+// Variables
+:root
+    --primary: rgb(8, 108, 226)
+    --secondary: rgb(254, 115, 186)
+    --tertiary: rgb(43, 27, 136)
+    --accent: rgb(3, 192, 144)
+    --font: rgb(22, 19, 44)
+    --fontBox: rgb(29, 24, 73)
+    --fontBox2: rgb(23, 20, 54)
+    --text: #ffffff
+    --textAccent: rgb(255, 228, 75)
+    --fontOpacity: 0.50
+    --boxRadius: 15px
+// General
+:root
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif
+
+/*-------------------------------------*/
+// GENERAL
+body
+    position:relative
+    height: 100%
+    user-select: none
+    -webkit-user-select: none
+    -ms-user-select: none
+    color: var(--text)
+    background-color: var(--font)
+
+a
+    color: var(--text)
+
+/*------------------------------------*/
+// ESPECIAL
+.flex
+    display: flex
+
+.w-100
+    width: 100%
+
+.h-100
+    height: 100%
+
+.flex-center
+    display: flex
+    justify-content: center
+    align-items: center
+
+.flex-column
+    display: flex
+    flex-direction: column
+
+.align-center
+    display: flex
+    justify-content: start
+    align-items: center
+
+.gap-15
+    gap: 15px
+
+/*------------------------------------*/
+// LAYOUT
+.layout
+    position: relative
+
+/*------------------------------------*/
+// SIDEBAR
+.sidebar
+    padding: 20px 15px 20px 18px
+    background-color: var(--fontBox)
+    position: fixed
+    right: 0
+    top: 108px
+    border: 1px solid var(--font)
+    border-radius: var(--boxRadius) 0 0 var(--boxRadius)
+
+.nav nav
+    display: flex
+    flex-direction: column
+    gap: 15px
+    
+    a
+        font-size: 27px
+        &:hover
+            color: var(--accent)
+            cursor: pointer
+
+/*------------------------------------*/
+// UPBAR
+.logo
+    width: 80px
+    
+.upbar
+    width: 100%
+    padding: 15px 30px
+    display: flex
+    justify-content: space-between
+    align-items: center
+    gap: 10px
+
+/*------------------------------------*/
+// MAIN
+.layout-content
+    display: flex
+    flex-direction: column
+    width: 100%
+    height: 100%
+
+.main
+    padding: 10px 80px 30px 30px
+    height: 100%
+
+.content
+    display: flex
+    gap: 15px
+    flex-wrap: wrap
+
+/*------------------------------------*/
+// OBJECTS
+.box
+    background-color: var(--fontBox)
+    padding: 40px
+    border-radius: var(--boxRadius)
+
+.btn
+    background-color: var(--fontBox)
+    padding: 12px
+    border-radius: var(--boxRadius)
+    display: flex
+    justify-content: center
+    align-items: center
+    cursor: pointer
+
+    &:hover
+        background-color: var(--primary)
+
+.folder
+    background-color: var(--fontBox2)
+    padding: 20px
+    border-radius: var(--boxRadius)
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 2px
+    position: relative
+
+    .options
+        position: absolute
+        top: 8px
+        right: 5px
+        color: var(--primary)
+        padding: 5px 3px
+        border-radius: var(--boxRadius)
+        opacity: 0.5
+
+        &:hover
+            background-color: var(--fontBox)
+            color: var(--accent)
+
+    &:hover
+        background-color: var(--tertiary)
+        cursor: pointer
+
+    .icon
+        font-size: 40px
+        color: var(--primary)
+    
+    .icon.pink
+        color: var(--secondary)
+    
+    .icon.green
+        color: var(--accent)
