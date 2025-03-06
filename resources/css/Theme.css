@@ -5,7 +5,7 @@
   --tertiary: rgb(43, 27, 136);
   --accent: rgb(3, 192, 144);
   --font: rgb(22, 19, 44);
-  --fontBox: rgb(29, 24, 73);
+  --fontBox: rgb(33, 28, 82);
   --fontBox2: rgb(23, 20, 54);
   --text: #ffffff;
   --textAccent: rgb(255, 228, 75);
@@ -18,7 +18,12 @@
 }
 
 /*-------------------------------------*/
+html {
+  background-color: var(--font);
+}
+
 body {
+  position: relative;
   height: 100%;
   -moz-user-select: none;
        user-select: none;
@@ -27,6 +32,7 @@ body {
   color: var(--text);
   background-color: var(--font);
 }
+
 a {
   color: var(--text);
 }
@@ -68,6 +74,8 @@ a {
 /*------------------------------------*/
 .layout {
   position: relative;
+  background-color: var(--font);
+  color: var(--text);
 }
 
 /*------------------------------------*/
@@ -76,9 +84,11 @@ a {
   background-color: var(--fontBox);
   position: fixed;
   right: 0;
-  top: 108px;
+  top: 104px;
   border: 1px solid var(--font);
   border-radius: var(--boxRadius) 0 0 var(--boxRadius);
+  color: var(--text);
+  z-index: 99;
 }
 
 .nav nav {
@@ -90,8 +100,10 @@ a {
   font-size: 27px;
 }
 .nav nav a:hover {
-  color: var(--accent);
   cursor: pointer;
+}
+.nav nav a:hover svg {
+  color: var(--secondary);
 }
 
 /*------------------------------------*/
@@ -117,8 +129,8 @@ a {
 }
 
 .main {
-  padding: 10px 80px 30px 30px;
-  height: 100%;
+  padding: 10px 80px 150px 30px;
+  min-height: 100%;
 }
 
 .content {
@@ -126,15 +138,31 @@ a {
   gap: 15px;
   flex-wrap: wrap;
 }
+@media (max-width: 768px) {
+  .content {
+    padding-bottom: 80px;
+  }
+}
 
 /*------------------------------------*/
 .box {
   background-color: var(--fontBox);
-  padding: 40px;
   border-radius: var(--boxRadius);
+  padding: 40px;
+}
+.box .content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .box .content .element {
+    width: 100%;
+  }
 }
 
-.btn {
+.button {
   background-color: var(--fontBox);
   padding: 12px;
   border-radius: var(--boxRadius);
@@ -142,46 +170,146 @@ a {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color: var(--text);
 }
-.btn:hover {
+.button:hover {
   background-color: var(--primary);
 }
 
-.folder {
+.folder, .file {
   background-color: var(--fontBox2);
-  padding: 20px;
+  border: 2px solid var(--fontBox2);
+  padding: 12px 20px;
   border-radius: var(--boxRadius);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2px;
   position: relative;
+  gap: 2px;
+  width: 150px;
 }
-.folder .options {
+@media (max-width: 768px) {
+  .folder, .file {
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    padding: 0 17px 5px;
+  }
+  .folder span, .file span {
+    margin-top: 6px;
+  }
+}
+.folder .options, .file .options {
   position: absolute;
   top: 8px;
   right: 5px;
+}
+.folder .options .options-elipsis, .file .options .options-elipsis {
   color: var(--primary);
   padding: 5px 3px;
   border-radius: var(--boxRadius);
-  opacity: 0.5;
 }
-.folder .options:hover {
+.folder .options .options-elipsis:hover, .folder .options .options-elipsis:active, .folder .options .options-elipsis:focus, .folder .options .options-elipsis:visited, .folder .options .options-elipsis:link, .file .options .options-elipsis:hover, .file .options .options-elipsis:active, .file .options .options-elipsis:focus, .file .options .options-elipsis:visited, .file .options .options-elipsis:link {
   background-color: var(--fontBox);
   color: var(--accent);
 }
-.folder:hover {
+.folder .options ul li a, .file .options ul li a {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2px 5px;
+}
+@media (max-width: 768px) {
+  .folder .options, .file .options {
+    top: 15px;
+  }
+}
+.folder:hover, .file:hover {
   background-color: var(--tertiary);
   cursor: pointer;
 }
-.folder .icon {
+.folder .icon, .file .icon {
   font-size: 40px;
   color: var(--primary);
 }
-.folder .icon.pink {
+.folder .icon.pink, .file .icon.pink {
   color: var(--secondary);
 }
-.folder .icon.green {
+.folder .icon.green, .file .icon.green {
   color: var(--accent);
+}
+.folder .title, .file .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: "..";
+  display: block;
+  max-width: 100%;
+  font-size: 11pt;
+}
+@media (max-width: 768px) {
+  .folder .title, .file .title {
+    max-width: 78%;
+  }
+}
+
+.file {
+  background-color: var(--fontBox);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    padding: 10px;
+    background-color: var(--fontBox);
+    position: fixed;
+    top: inherit;
+    right: 0;
+    bottom: 0;
+    border: 2px solid var(--font);
+    border-radius: 0;
+    width: 100%;
+  }
+  .sidebar .nav nav {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 15px;
+  }
+  .main {
+    padding: 10px 30px 110px 30px;
+  }
+  .content {
+    gap: 10px;
+  }
+  .box {
+    padding: 20px;
+  }
+  .btn {
+    padding: 10px;
+  }
+}
+/*------------------------------------*/
+.dropdown-menu {
+  background-color: var(--primary) !important;
+  border-radius: var(--boxRadius) !important;
+  border: 2px solid var(--fontBox) !important;
+  padding: 10px 8px !important;
+}
+.dropdown-menu a {
+  color: var(--text) !important;
+  border-radius: var(--boxRadius) !important;
+}
+.dropdown-menu a.red {
+  color: var(--tertiary) !important;
+}
+.dropdown-menu a:hover {
+  background-color: var(--secondary) !important;
+}
+
+/*------------------------------------*/
+.min-100 {
+  min-height: 100%;
 }/*# sourceMappingURL=Theme.css.map */

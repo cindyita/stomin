@@ -1,13 +1,14 @@
-import { IoEllipsisVertical, IoFolder } from "react-icons/io5";
+import { IoArrowBackCircle, IoColorPalette, IoEllipsisVertical, IoFolder, IoInformationCircle, IoPencil, IoShareSocial, IoTrash } from "react-icons/io5";
+import ElementDropdown from "./ElementDropdown";
 
-export default function Folder({ children, type, ...props }: any) {
+export default function Folder({ children, color, type, ...props }: any) {
     return (
-        <div className='folder' {...props}>
-            <div className="options"><IoEllipsisVertical /></div>
-            <div className={`icon ${type}`}>
+        <div className='folder element' {...props}>
+            <ElementDropdown />
+            <div className={`icon ${color}`}>
                 <IoFolder />
             </div>
-            <h4>{children}</h4>
+            <span className="title" title={children}>{children}</span>
         </div>
     );
 }

@@ -4,6 +4,8 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode, useState } from 'react';
+import { FaUser } from 'react-icons/fa';
+import { GrStorage } from 'react-icons/gr';
 import { IoDocumentSharp, IoFileTraySharp, IoFolder, IoFolderSharp, IoFunnel, IoHeart, IoSettings, IoStar, IoTrash } from 'react-icons/io5';
 
 export default function Authenticated({
@@ -43,14 +45,14 @@ export default function Authenticated({
                             </div>
                         </div>
                         <div className="align-center gap-15">
-                            <span className="btn">150mb/100GB</span>
-                            <span className="btn"><IoFunnel /></span>
-                            <span className="btn">Hola, {user.name}</span>
+                            <span className="button"><span className="d-flex d-md-none"><GrStorage /></span><span className="d-none d-md-flex">150mb/100GB</span></span>
+                            <span className="button"><IoFunnel /></span>
+                            <span className="button"><span className="d-flex d-md-none"><FaUser /></span><span className="d-none d-md-flex">Hola, {user.name}</span></span>
                         </div>
                     </div>
 
                     <main className="main">
-                        <div className="box h-100">
+                        <div className="box min-100">
                             {children}
                         </div>
                     </main>
