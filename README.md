@@ -1,3 +1,3 @@
 # StoMin
-Laravel + React + Typescript + Inertia + Vite + TailwindCSS
-## php 8.4
+Laravel + React + Typescript + Inertia + Vite 
+[php 8.4]
