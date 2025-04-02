@@ -67,8 +67,8 @@ a {
   align-items: center;
 }
 
-.gap-15 {
-  gap: 15px;
+.gap-12 {
+  gap: 12px;
 }
 
 /*------------------------------------*/
@@ -103,6 +103,9 @@ a {
   cursor: pointer;
 }
 .nav nav a:hover svg {
+  color: var(--primary);
+}
+.nav nav a.active svg {
   color: var(--secondary);
 }
 
@@ -162,7 +165,7 @@ a {
   }
 }
 
-.button {
+.button, .button2 {
   background-color: var(--fontBox);
   padding: 12px;
   border-radius: var(--boxRadius);
@@ -172,8 +175,12 @@ a {
   cursor: pointer;
   color: var(--text);
 }
-.button:hover {
+.button:hover, .button2:hover {
   background-color: var(--primary);
+}
+
+.button2 {
+  background-color: var(--tertiary);
 }
 
 .folder, .file {
@@ -205,6 +212,7 @@ a {
   position: absolute;
   top: 8px;
   right: 5px;
+  cursor: pointer;
 }
 .folder .options .options-elipsis, .file .options .options-elipsis {
   color: var(--primary);
@@ -224,7 +232,7 @@ a {
 }
 @media (max-width: 768px) {
   .folder .options, .file .options {
-    top: 15px;
+    top: 19px;
   }
 }
 .folder:hover, .file:hover {
@@ -251,14 +259,54 @@ a {
 }
 @media (max-width: 768px) {
   .folder .title, .file .title {
-    max-width: 78%;
+    max-width: 70%;
   }
+}
+
+.favoriteElement, .shareElement {
+  font-size: 12pt;
+  position: absolute;
+  top: 9px;
+  left: 12px;
+  cursor: pointer;
+  color: var(--primary);
+  opacity: 0.2;
+}
+.favoriteElement:hover, .shareElement:hover {
+  color: var(--textAccent);
+  opacity: 0.4;
+}
+
+.favoriteElement.active {
+  color: var(--textAccent);
+  opacity: 0.7;
+}
+
+.shareElement {
+  top: 28px;
+  opacity: 0.5;
 }
 
 .file {
   background-color: var(--fontBox);
 }
 
+@media (max-width: 768px) {
+  .favoriteElement {
+    top: 19px;
+    left: inherit;
+    right: 24px;
+    font-size: 12pt;
+  }
+  .shareElement {
+    top: inherit;
+    bottom: 2px;
+    left: 7px;
+    font-size: 18pt;
+    opacity: 0.2;
+    color: var(--text);
+  }
+}
 @media (max-width: 768px) {
   .sidebar {
     padding: 10px;
@@ -307,6 +355,65 @@ a {
 }
 .dropdown-menu a:hover {
   background-color: var(--secondary) !important;
+}
+
+/*------------------------------------*/
+.content-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: var(--font);
+  color: var(--text);
+}
+
+.form-control {
+  background: var(--fontBox) !important;
+  border: 2px solid var(--primary) !important;
+  border-radius: var(--boxRadius) !important;
+  color: var(--text) !important;
+}
+.form-control::-moz-placeholder {
+  color: rgba(112, 112, 112, 0.4509803922) !important;
+}
+.form-control::placeholder {
+  color: rgba(112, 112, 112, 0.4509803922) !important;
+}
+
+/*------------------------------------*/
+.btn {
+  border-radius: var(--boxRadius) !important;
+  background: var(--primary) !important;
+  border: 0 !important;
+}
+.btn:hover {
+  background: var(--secondary) !important;
+}
+
+/*------------------------------------*/
+.modal .modal-content {
+  background-color: var(--fontBox);
+  border-radius: var(--boxRadius);
+  color: var(--text);
+  border: 2px solid var(--primary);
+}
+.modal .modal-header {
+  border-bottom: 0;
+}
+.modal .modal-footer {
+  border-top: 0;
+}
+.modal .btn-close {
+  color: var(--text);
+  --bs-btn-close-bg: transparent;
+  width: auto;
+  height: auto;
+}
+.modal .btn-close svg {
+  font-size: 20pt;
+}
+.modal .btn-close:hover {
+  color: var(--secondary);
 }
 
 /*------------------------------------*/

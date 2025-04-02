@@ -57,8 +57,8 @@ a
     justify-content: start
     align-items: center
 
-.gap-15
-    gap: 15px
+.gap-12
+    gap: 12px
 
 /*------------------------------------*/
 // LAYOUT
@@ -89,8 +89,12 @@ a
         font-size: 27px
         &:hover
             svg
-                color: var(--secondary)
+                color: var(--primary)
             cursor: pointer
+    
+    a.active
+        svg
+            color: var(--secondary)
 
 /*------------------------------------*/
 // UPBAR
@@ -142,7 +146,7 @@ a
             .element
                 width: 100%
 
-.button
+.button,.button2
     background-color: var(--fontBox)
     padding: 12px
     border-radius: var(--boxRadius)
@@ -154,6 +158,10 @@ a
 
     &:hover
         background-color: var(--primary)
+
+.button2
+    background-color: var(--tertiary)
+
 
 .folder, .file
     background-color: var(--fontBox2)
@@ -182,6 +190,7 @@ a
         position: absolute
         top: 8px
         right: 5px
+        cursor: pointer
 
         .options-elipsis
             color: var(--primary)
@@ -200,7 +209,7 @@ a
             padding: 2px 5px
 
         @media (max-width: 768px)
-            top: 15px
+            top: 19px
 
     &:hover
         background-color: var(--tertiary)
@@ -225,10 +234,45 @@ a
         font-size: 11pt
 
         @media (max-width: 768px)
-            max-width: 78%
+            max-width: 70%
+
+.favoriteElement,.shareElement
+    font-size: 12pt
+    position: absolute
+    top: 9px
+    left: 12px
+    cursor: pointer
+    color: var(--primary)
+    opacity: 0.2
+
+    &:hover
+        color: var(--textAccent)
+        opacity: 0.4
+
+.favoriteElement.active
+    color: var(--textAccent)
+    opacity: 0.7
+
+.shareElement
+    top: 28px
+    opacity: 0.5
 
 .file
     background-color: var(--fontBox)
+
+@media (max-width: 768px)
+    .favoriteElement
+        top: 19px
+        left: inherit
+        right: 24px
+        font-size: 12pt
+    .shareElement
+        top: inherit
+        bottom: 2px
+        left: 7px
+        font-size: 18pt
+        opacity:0.2
+        color: var(--text)
 
 //Sidebar mobile
 @media (max-width: 768px)
@@ -276,7 +320,59 @@ a
 
         &:hover
             background-color: var(--secondary) !important
-            
+
+/*------------------------------------*/
+// FORMS
+.content-login
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 100%
+    background: var(--font)
+    color: var(--text)
+
+.form-control
+    background: var(--fontBox) !important
+    border: 2px solid var(--primary) !important
+    border-radius: var(--boxRadius) !important
+    color: var(--text) !important
+    &::placeholder
+        color: #70707073 !important
+
+/*------------------------------------*/
+// BOTONES
+.btn
+    border-radius: var(--boxRadius) !important
+    background: var(--primary) !important
+    border: 0 !important
+
+    &:hover
+        background: var(--secondary) !important
+
+/*------------------------------------*/
+// MODALES
+.modal
+    .modal-content
+        background-color: var(--fontBox)
+        border-radius: var(--boxRadius)
+        color: var(--text)
+        border: 2px solid var(--primary)
+    .modal-header
+        border-bottom:0
+    .modal-footer
+        border-top:0
+    .btn-close
+        color: var(--text)
+        background:transparent
+        --bs-btn-close-bg: transparent
+        width: auto
+        height: auto
+        svg
+            font-size:20pt
+        &:hover
+            color: var(--secondary)
+
+
 /*------------------------------------*/
 // ESPECIAL CLASS
 .min-100
