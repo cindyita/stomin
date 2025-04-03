@@ -1,4 +1,5 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import OpenModal from '@/Components/OpenModal';
 import { Link, usePage } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
@@ -58,9 +59,9 @@ export default function Authenticated({
                             </div>
                             <div className="align-center gap-12">
                                 {createBtns && (<>
-                                    <span className="button2"><MdCreateNewFolder /><span className="d-none d-md-flex ps-1">Create folder</span></span>
+                                    <OpenModal id="create-folder" className="button2"><MdCreateNewFolder /><span className="d-none d-md-flex ps-1">Create folder</span></OpenModal>
 
-                                    <span className="button2"><FaFileArrowUp /><span className="d-none d-md-flex ps-1">Upload file</span></span>
+                                    <OpenModal id="upload-file" className="button2"><FaFileArrowUp /><span className="d-none d-md-flex ps-1">Upload file</span></OpenModal>
                                 </>)}
 
                                 {homeBtn && (<>

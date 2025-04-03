@@ -4,6 +4,7 @@
   --secondary: rgb(254, 115, 186);
   --tertiary: rgb(43, 27, 136);
   --accent: rgb(3, 192, 144);
+  --yellow: rgb(255, 228, 75);
   --font: rgb(22, 19, 44);
   --fontBox: rgb(33, 28, 82);
   --fontBox2: rgb(23, 20, 54);
@@ -134,6 +135,11 @@ a {
 
 .main {
   padding: 10px 80px 150px 30px;
+  min-height: 100%;
+}
+
+.main2 {
+  padding: 10px 30px 50px 30px;
   min-height: 100%;
 }
 
@@ -368,20 +374,28 @@ a {
   color: var(--text);
 }
 
-.form-control {
+.form-control, .form-select {
   background: var(--fontBox) !important;
   border: 2px solid var(--primary) !important;
   border-radius: var(--boxRadius) !important;
   color: var(--text) !important;
 }
-.form-control::-moz-placeholder {
+.form-control::-moz-placeholder, .form-select::-moz-placeholder {
   color: rgba(112, 112, 112, 0.4509803922) !important;
 }
-.form-control::placeholder {
+.form-control::placeholder, .form-select::placeholder {
   color: rgba(112, 112, 112, 0.4509803922) !important;
 }
-.form-control:focus, .form-control:active {
+.form-control:focus, .form-control:active, .form-select:focus, .form-select:active {
   background: var(--font) !important;
+}
+
+.form-select, .form-select:focus, .form-select:active {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 10px center !important;
+  background-size: 16px 16px !important;
+  padding-right: 30px !important;
 }
 
 /*------------------------------------*/
@@ -422,7 +436,38 @@ a {
   text-decoration: none !important;
 }
 
+.text-muted {
+  font-size: 10pt;
+  color: var(--text) !important;
+  opacity: 0.5 !important;
+}
+
+.btn-x {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  opacity: 0.6;
+}
+.btn-x:hover {
+  opacity: 1;
+}
+
 /*------------------------------------*/
+.modal .modal-dialog {
+  height: auto;
+}
 .modal .modal-content {
   background-color: var(--fontBox);
   border-radius: var(--boxRadius);
@@ -449,6 +494,60 @@ a {
 }
 
 /*------------------------------------*/
+.ldhnvA > span {
+  font-size: 11pt !important;
+  color: var(--text) !important;
+}
+
+.kYvNJ {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+}
+.kYvNJ .file-types {
+  display: none;
+}
+
+.file-uploader {
+  width: 100%;
+  min-height: 100px !important;
+}
+@media (max-width: 768px) {
+  .file-uploader {
+    min-height: auto !important;
+  }
+}
+
+.preview-doc {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 10pt;
+  line-height: 10pt;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+  padding: 3px;
+}
+
+/*------------------------------------*/
+.icon-folder {
+  font-size: 50px;
+  margin-bottom: 5px;
+}
+
+/*------------------------------------*/
 .min-100 {
   min-height: 100%;
+}
+
+.opacity-25 {
+  opacity: 0.25;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }/*# sourceMappingURL=Theme.css.map */

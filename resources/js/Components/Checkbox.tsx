@@ -2,16 +2,20 @@ import { InputHTMLAttributes } from 'react';
 
 export default function Checkbox({
     className = '',
+    textLabel = '',
     ...props
-}: InputHTMLAttributes<HTMLInputElement>) {
+}: InputHTMLAttributes<HTMLInputElement> & { textLabel: string }) {
     return (
-        <input
-            {...props}
-            type="checkbox"
-            className={
-                'rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800 ' +
+        <>
+        <div className="form-check">
+            <input className={
+                'form-check-input' +
                 className
-            }
-        />
+            } type="checkbox" {...props} />
+            <label className="form-check-label" htmlFor="flexCheckDefault">
+                {textLabel}
+            </label>
+        </div>
+        </>
     );
 }

@@ -20,7 +20,7 @@ export default function Welcome({
             <Head title="Welcome" />
             <div className="">
 
-                            <nav className="">
+                            {/* <nav className="">
                                 {auth.user ? (
                                     <Link
                                         href={route('dashboard')}
@@ -42,7 +42,7 @@ export default function Welcome({
                                         </Link>
                                     </>
                                 )}
-                            </nav>
+                            </nav> */}
             </div>
         </>
     );

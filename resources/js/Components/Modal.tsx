@@ -1,11 +1,12 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { IoClose } from 'react-icons/io5';
+import { FaCheck } from "react-icons/fa";
 
 export default function Modal({
     children,
     id,
     title,
-    saveBtn = 'Send',
+    saveBtn = 'Save',
     onSave = () => { },
     width = 'lg'
 }: PropsWithChildren<{
@@ -36,7 +37,7 @@ export default function Modal({
                             saveBtn &&
                             <div className="modal-footer">
                                     <button type="button" className="btn btn-primary" onClick={save}>
-                                        {saveBtn}
+                                        {saveBtn} <FaCheck />
                                     </button>
                             </div>
                         }
