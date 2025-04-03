@@ -1,15 +1,38 @@
 export interface User {
     id: number;
     name: string;
-    biography: string;
+    biography: string | null;
     email: string;
     email_verified_at?: string;
+}
+
+export interface AccountType {
+    id: number;
+    name: string;
+    total_storage: number;
+    total_files: number | null;
+    max_level_files: number;
+    total_trash: number | null;
+    can_share_open: number;
+    can_share_private: number;
+    created_at: string;
+    updated_at: string | null;
+}
+
+export interface DataAccount {
+    id: number;
+    id_user: number;
+    id_role: number;
+    type_account: number;
+    created_at: string;
+    updated_at: string | null;
+    account_type: AccountType;
 }
 
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {
-    auth: {
-        user: User;
-    };
+    user?: User;
+    dataAccount?: DataAccount;
 };
+

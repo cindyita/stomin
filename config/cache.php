@@ -41,7 +41,7 @@ return [
         'database' => [
             'driver' => 'database',
             'connection' => env('DB_CACHE_CONNECTION'),
-            'table' => env('DB_CACHE_TABLE', 'cache'),
+            'table' => env('DB_CACHE_TABLE', 'sys_cache'),
             'lock_connection' => env('DB_CACHE_LOCK_CONNECTION'),
             'lock_table' => env('DB_CACHE_LOCK_TABLE'),
         ],
@@ -82,7 +82,7 @@ return [
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
-            'table' => env('DYNAMODB_CACHE_TABLE', 'cache'),
+            'table' => env('DYNAMODB_CACHE_TABLE', 'sys_cache'),
             'endpoint' => env('DYNAMODB_ENDPOINT'),
         ],
 

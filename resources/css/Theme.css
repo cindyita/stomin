@@ -76,6 +76,7 @@ a {
   position: relative;
   background-color: var(--font);
   color: var(--text);
+  min-height: 100%;
 }
 
 /*------------------------------------*/
@@ -379,6 +380,9 @@ a {
 .form-control::placeholder {
   color: rgba(112, 112, 112, 0.4509803922) !important;
 }
+.form-control:focus, .form-control:active {
+  background: var(--font) !important;
+}
 
 /*------------------------------------*/
 .btn {
@@ -388,6 +392,34 @@ a {
 }
 .btn:hover {
   background: var(--secondary) !important;
+}
+
+.btn.btn-danger {
+  background: #aa0f0f !important;
+  border: 0 !important;
+}
+.btn.btn-danger:hover {
+  background: var(--secondary) !important;
+}
+
+.btn.btn-muted {
+  background: grey !important;
+  border: 0 !important;
+}
+.btn.btn-muted:hover {
+  background: var(--secondary) !important;
+}
+
+.normal-link {
+  color: var(--text);
+  text-decoration: none;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none !important;
 }
 
 /*------------------------------------*/

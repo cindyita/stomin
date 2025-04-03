@@ -38,6 +38,7 @@ select:focus,
 textarea:focus,
 input.form-control:focus,
 select.form-control:focus,
+textarea.form-control:focus,
 a:focus {
     outline: none;
     outline-width: 0;

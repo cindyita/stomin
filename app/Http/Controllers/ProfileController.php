@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\DataAccount;
 
 class ProfileController extends Controller
 {
@@ -18,9 +19,17 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
+        $user = Auth::user();
+
+        $dataAccount = DataAccount::where('id_user', $user->id)
+            ->with('accountType')
+            ->first();
+
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'user' => $user,
+            'dataAccount' => $dataAccount
         ]);
     }
 

@@ -15,7 +15,7 @@ export default function UpdateProfileInformation({
     status?: string;
     className?: string;
 }) {
-    const user = usePage().props.auth.user;
+    const user = usePage().props.user ?? {name: '', email: '',biography: '',email_verified_at:null};
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
@@ -33,55 +33,50 @@ export default function UpdateProfileInformation({
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                <h2>
                     Profile Information
                 </h2>
 
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Update your account's profile information and email address.
-                </p>
             </header>
+            <hr />
 
             <form onSubmit={submit} className="mt-6 space-y-6">
-                <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">Name:</label>
 
-                    <TextInput
+                    <input
                         id="name"
-                        className="mt-1 block w-full"
+                        className="form-control"
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
                         required
-                        isFocused
                         autoComplete="name"
                     />
 
                     <InputError className="mt-2" message={errors.name} />
                 </div>
 
-                <div>
-                    <InputLabel htmlFor="biography" value="biography" />
+                <div className="mb-3">
+                    <label htmlFor="biography" className="form-label">Biography:</label>
 
-                    <TextInput
+                    <textarea
                         id="biography"
-                        className="mt-1 block w-full"
-                        value={data.biography}
+                        className="form-control"
                         onChange={(e) => setData('biography', e.target.value)}
                         required
-                        isFocused
                         autoComplete="biography"
-                    />
+                    >{data.biography ?? ''}</textarea>
 
                     <InputError className="mt-2" message={errors.biography} />
                 </div>
 
-                <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                <div className="mb-3">
+                    <label htmlFor="email" className="form-label">Email:</label>
 
-                    <TextInput
+                    <input
                         id="email"
                         type="email"
-                        className="mt-1 block w-full"
+                        className="form-control"
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
                         required

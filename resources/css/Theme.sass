@@ -66,6 +66,7 @@ a
     position: relative
     background-color: var(--font)
     color: var(--text)
+    min-height: 100%
 
 /*------------------------------------*/
 // SIDEBAR
@@ -338,6 +339,8 @@ a
     color: var(--text) !important
     &::placeholder
         color: #70707073 !important
+    &:focus,&:active
+        background: var(--font) !important
 
 /*------------------------------------*/
 // BOTONES
@@ -348,6 +351,29 @@ a
 
     &:hover
         background: var(--secondary) !important
+
+.btn.btn-danger
+    background: #aa0f0f !important
+    border: 0 !important
+
+    &:hover
+        background: var(--secondary) !important
+
+.btn.btn-muted
+    background: grey !important
+    border: 0 !important
+
+    &:hover
+        background: var(--secondary) !important
+
+.normal-link
+    color: var(--text)
+    text-decoration: none
+    background-color: transparent
+    border: 0
+    padding: 0
+a
+    text-decoration: none !important
 
 /*------------------------------------*/
 // MODALES

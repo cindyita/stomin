@@ -5,7 +5,7 @@ export default function Modal({
     children,
     id,
     title,
-    saveBtn = 'Aceptar',
+    saveBtn = 'Send',
     onSave = () => { },
     width = 'lg'
 }: PropsWithChildren<{
