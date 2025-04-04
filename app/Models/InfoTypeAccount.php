@@ -15,6 +15,7 @@ class InfoTypeAccount extends Model
         'name',
         'total_storage',
         'total_files',
+        'max_size_files',
         'max_level_files',
         'total_trash',
         'can_share_open',

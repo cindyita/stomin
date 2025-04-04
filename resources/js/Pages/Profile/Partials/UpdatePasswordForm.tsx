@@ -63,7 +63,6 @@ export default function UpdatePasswordForm({
                     <input
                         id="current_password"
                         ref={currentPasswordInput}
-                        value=""
                         onChange={(e) =>
                             setData('current_password', e.target.value)
                         }
@@ -84,7 +83,6 @@ export default function UpdatePasswordForm({
                     <input
                         id="password"
                         ref={passwordInput}
-                        value=""
                         onChange={(e) => setData('password', e.target.value)}
                         type="password"
                         className="form-control"

@@ -11,6 +11,7 @@ export interface AccountType {
     name: string;
     total_storage: number;
     total_files: number | null;
+    max_size_files: number;
     max_level_files: number;
     total_trash: number | null;
     can_share_open: number;
@@ -33,11 +34,19 @@ export interface File {
     name: string;
 }
 
+export interface typeFilesData {
+    name: string;
+    extension: string;
+    type_mime: string;
+    id_type_level: number;
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {
     user?: User;
     dataAccount?: DataAccount;
     file?: File;
+    typeFiles?: string[];
 };
 

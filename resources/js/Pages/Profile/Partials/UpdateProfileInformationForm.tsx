@@ -15,7 +15,9 @@ export default function UpdateProfileInformation({
     status?: string;
     className?: string;
 }) {
-    const user = usePage().props.user ?? {name: '', email: '',biography: '',email_verified_at:null};
+    const user = usePage().props.user ?? { name: '', email: '', biography: '', email_verified_at: null };
+    const dataAccount = usePage().props.dataAccount ?? { account_type: { name: '',total_storage: 0, max_size_files:0 } };
+    const dataTypeAccount: any = dataAccount.account_type;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
@@ -34,7 +36,8 @@ export default function UpdateProfileInformation({
         <section className={className}>
             <header>
                 <h2>
-                    Profile Information
+                    {user.name}
+                    <p className="text-muted">Account type: {dataTypeAccount.name}</p>
                 </h2>
 
             </header>

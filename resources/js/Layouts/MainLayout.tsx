@@ -21,10 +21,10 @@ export default function Authenticated({
     const dataAccount = usePage().props.dataAccount ?? { account_type: { total_storage: 0 } };
     
     const dataTypeAccount = dataAccount.account_type;
-    const total_storage = (dataTypeAccount.total_storage / 1024).toFixed(0);
+    const total_storage = (dataTypeAccount.total_storage / 1000); // Convert to GB
     const storage_usage = 2000;
-    const percentage_usage = 20;
-
+    const percentage_usage = (storage_usage / dataTypeAccount.total_storage) * 100;
+    
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
@@ -71,7 +71,7 @@ export default function Authenticated({
                                 <span className="button" style={{
                                     background: `linear-gradient(to top, var(--secondary) ${percentage_usage}%, var(--fontBox) ${percentage_usage}% 100%)`
                                 }}>
-                                    <span className="d-flex d-md-none" title={`${storage_usage} MB de ${total_storage} GB used`}><GrStorage /></span><span className="d-none d-md-flex">{storage_usage} MB de {total_storage} GB used</span></span>
+                                    <span className="d-flex d-md-none" title={`${storage_usage} MB of ${total_storage} GB used`}><GrStorage /></span><span className="d-none d-md-flex">{storage_usage} MB of {total_storage} GB used</span></span>
 
                                 <span className="button d-none"><IoFunnel /></span>
 

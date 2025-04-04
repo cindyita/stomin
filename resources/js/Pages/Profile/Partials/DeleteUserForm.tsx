@@ -81,7 +81,6 @@ export default function DeleteUserForm({
                             type="password"
                             name="password"
                             ref={passwordInput}
-                            value=""
                             onChange={(e) =>
                                 setData('password', e.target.value)
                             }

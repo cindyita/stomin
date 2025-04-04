@@ -12,10 +12,11 @@ export default function Dashboard() {
     let actualFolderPath = "home/";
 
     const user = usePage().props.user ?? {name:'?', email: ''};
-    const dataAccount = usePage().props.dataAccount ?? { account_type: { total_storage: 0 } };
-    const dataTypeAccount:any = dataAccount.account_type;
-
-    const fileTypes = ["JPG", "JPEG", "PNG", "GIF", "TXT", "PDF", "DOCX", "XLSX"];
+    const dataAccount = usePage().props.dataAccount ?? { account_type: { total_storage: 0, max_size_files:0 } };
+    const dataTypeAccount: any = dataAccount.account_type;
+    const maxSizeFiles: number = dataTypeAccount.max_size_files;
+    const typeFiles: string[] = usePage().props.typeFiles ?? [];
+    
     const [file, setFile] = useState<File[] | null>(null);
     const [fileNames, setFileNames] = useState([] as string[]);
     const [previews, setPreviews] = useState<string[]>([]);
@@ -61,8 +62,6 @@ export default function Dashboard() {
             setpreviewFolderColor("white");
         }
         setpreviewFolderColor(color);
-        console.log(previewFolderColor);
-        
     };
 
     const isImageFile = (fileName: string) => {
@@ -111,14 +110,14 @@ export default function Dashboard() {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">Folder name:</label>
-                        <input type="text" name="name" value="" className="form-control" /></div>
+                        <input type="text" name="name" className="form-control" /></div>
                     <div className="mb-3">
                         <label htmlFor="url" className="form-label">Url:</label>
-                        <input type="text" name="url" value={actualFolderPath} className="form-control" /></div>
+                        <input type="text" name="url" defaultValue={actualFolderPath} className="form-control" /></div>
                     <div className="mb-3">
                         <label htmlFor="color" className="form-label">Color:</label>
                         <select name="color" className="form-select" onChange={(e) => handleFolderColor(e.target.value)}>
-                            <option value="default" selected>default</option>
+                            <option value="default">default</option>
                             <option value="primary">Primary</option>
                             <option value="secondary">Secondary</option>
                             <option value="yellow">Yellow</option>
@@ -129,16 +128,16 @@ export default function Dashboard() {
             </Modal>
 
             <Modal id="upload-file" title="Upload file">
-                <p>Uploading files in: <input type="text" value={actualFolderPath} className="form-control" /></p>
+                <p>Uploading files in: <input type="text" defaultValue={actualFolderPath} className="form-control" /></p>
                 <p className="text-muted">{`You can upload files of maximum level ${levelFiles}`}</p>
                 <div>
                     <FileUploader
                         multiple={true}
                         handleChange={handleChange}
                         name="file"
-                        types={fileTypes}
+                        types={typeFiles}
                         uploadedLabel={file ? `${fileNames.join(", ")}` : "Uploaded Successfully"}
-                        maxSize={5000}
+                        maxSize={maxSizeFiles}
                         onSizeError={(file: any) => alert(`File size is too big`)}
                         classes="file-uploader"
                     />
