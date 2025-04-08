@@ -32,7 +32,7 @@ class FolderController extends Controller
         ->where('location',$url)
         ->get();
 
-        return json_encode($foldersUserInUrl);
+        return $foldersUserInUrl;
 
     }
 

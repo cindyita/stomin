@@ -10,9 +10,15 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index($path = null)
     {
         $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        $routeFolder = $path ? explode('/', $path) : [];
 
         $dataAccount = DataAccount::where('id_user', $user->id)
             ->with('accountType')
@@ -25,7 +31,8 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', [
             'user' => $user,
             'dataAccount' => $dataAccount,
-            'typeFiles' => $typesExtensions
+            'typeFiles' => $typesExtensions,
+            'routeFolder' => $routeFolder
         ]);
     }
 }

@@ -2,17 +2,20 @@ import { IoArrowBackCircle, IoColorPalette, IoEllipsisVertical, IoFolder, IoInfo
 import ElementDropdown from "./ElementDropdown";
 import FavoriteElement from "./FavoriteElement";
 import ShareElement from "./ShareElement";
+import { Link } from "@inertiajs/react";
 
-export default function Folder({ children, color, type, favorite = false,typeShare = 'none', ...props }: any) {
+export default function Folder({ children, color, href, favorite = false,typeShare = 'none', ...props }: any) {
     return (
         <div className='folder element' {...props}>
             <ElementDropdown />
             <FavoriteElement favorite={favorite} />
             <ShareElement typeShare={typeShare} />
-            <div className={`icon ${color}`}>
-                <IoFolder />
-            </div>
-            <span className="title" title={children}>{children}</span>
+            <Link href={href} className="d-flex flex-column align-items-center">
+                <div className={`icon ${color}`}>
+                    <IoFolder />
+                </div>
+                <span className="title" title={children}>{children}</span>
+            </Link>
         </div>
     );
 }

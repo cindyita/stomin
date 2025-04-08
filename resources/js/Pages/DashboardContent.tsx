@@ -1,26 +1,25 @@
 import Folder from '@/Components/Folder';
 import File from '@/Components/File';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head, usePage,router } from '@inertiajs/react';
+import { Head, usePage,router, Link } from '@inertiajs/react';
 import ModalBox from '@/Components/ModalBox';
 import { FileUploader } from "react-drag-drop-files";
 import { useEffect, useState } from 'react';
 import { FaXmark, FaFile, FaFolderClosed } from 'react-icons/fa6';
 
-import FolderUrlContext from '@/Contexts/FolderUrlContext';
 import Alert from '@/Components/Alert';
 
 import axios from "axios";
 import { Spinner } from 'react-bootstrap';
 
-export default function DashboardContent({alert = ''}: any) {
+export default function DashboardContent({ alert = '' }: any) {
+    
+    const routeFolder: any = usePage().props.routeFolder ?? ['home'];
 
     const [alerts, setAlerts] = useState<JSX.Element[]>([]);
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-    const [folderUrl, setFolderUrl] = useState('home');
-
-    const allFoldersPath = folderUrl.split('/');
+    const allFoldersPath = ["home", ...routeFolder];
     let actualFolderPath = allFoldersPath.length > 1 ? allFoldersPath.join('/') + '/' : 'home/';
 
     const [folders, setFolders] = useState([]);
@@ -38,7 +37,7 @@ export default function DashboardContent({alert = ''}: any) {
 
     const [previewFolderColor, setpreviewFolderColor] = useState<string>("");
 
-    const handleChange = (newFiles: any) => {
+    const handleFileChange = (newFiles: any) => {
         if (newFiles.length > 0) {
             setFileNames([]);
             const newFileNames = [...fileNames];
@@ -90,7 +89,13 @@ export default function DashboardContent({alert = ''}: any) {
         location: actualFolderPath,
         color: '',
     })
-    let createFolderDimissable = false;
+
+    const [newFile, setNewFile] = useState({
+        location: actualFolderPath,
+        color: '',
+        files:file,
+    })
+
     function createFolder(e:any) {
         e.preventDefault();
         const newErrors: { [key: string]: string } = {};
@@ -113,6 +118,30 @@ export default function DashboardContent({alert = ''}: any) {
         });
 
         router.post('/storefolder', newFolder);
+    }
+
+    function createFile(e:any) {
+        e.preventDefault();
+        const newErrors: { [key: string]: string } = {};
+        
+        if (!file) {
+            newErrors.file = 'File is required';
+            showAlert("File is required");
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return false;
+        }
+        setErrors({});
+
+        setNewFile({
+            location: actualFolderPath,
+            color: '',
+            files: file
+        });
+
+        router.post('/storefile', newFile);
     }
 
     function showAlert(message: string, title:string = '',type:string = 'danger') {
@@ -141,7 +170,7 @@ export default function DashboardContent({alert = ''}: any) {
         axios.get('/getfoldersuser', {
             params: { url: actualFolderPath }
         })
-        .then((response) => {
+            .then((response) => {
             setFolders(response.data);
             setFoldersLoading(false);
         })
@@ -150,14 +179,10 @@ export default function DashboardContent({alert = ''}: any) {
             setFoldersLoading(false);
         });
     }, [actualFolderPath]);
-    console.log(folders);
-    console.log(actualFolderPath);
-    
+
 
     return (
         <>
-            <FolderUrlContext.Provider value={{ folderUrl, setFolderUrl }}>
-             
             <MainLayout
                 header={
                     <h2 className="title">
@@ -175,12 +200,12 @@ export default function DashboardContent({alert = ''}: any) {
                 <Head title="Dashboard" />
                     
                 <div className="breadcrumb w-100">
-                    {allFoldersPath.map((folder, index) => {
+                    {allFoldersPath.map((folder:string, index:number) => {
                         const path = allFoldersPath.slice(0, index + 1).join('/');
                         return (
-                            <a key={path} onClick={() => setFolderUrl(path)} className="pathUrl">
+                            <Link key={path} href={`/`+path} className="pathUrl">
                                 {folder}/
-                            </a>
+                            </Link>
                         );
                     })}
                 </div>
@@ -196,9 +221,15 @@ export default function DashboardContent({alert = ''}: any) {
                             key={index}
                             color={folder.color}
                             typeShare={folder.type_share}
-                            onClick={() => setFolderUrl(folder.location + folder.name)}
+                            href={`/`+folder.location + folder.name}
                         >{folder.name}</Folder>
-                    ))}
+                        ))    
+                    }
+                    
+                        {
+                            folders.length < 1 && !foldersLoading && <div className="no-data">
+                                <span className="text-muted">Empty</span></div>
+                        }
                     {/* <Folder color="pink">Folder 1</Folder>
                     <Folder color="green" typeShare='open'>Folder 2</Folder>
                     <Folder color="blue" favorite={true}>Folder 3 test test</Folder>
@@ -239,14 +270,24 @@ export default function DashboardContent({alert = ''}: any) {
                 </div>
             </ModalBox>
 
-            <ModalBox id="upload-file" title="Upload file">
-                <p>Uploading files in: <input type="text" defaultValue={actualFolderPath} className="form-control" /></p>
+            <ModalBox id="upload-file" title="Upload file" onSave={createFile}>
+                <p>Uploading files in: <input type="text" name="location" className={`form-control ${errors.location ? 'border-danger' : ''}`} value={newFile.location} onChange={(e) => setNewFile({ ...newFile, location: e.target.value })} /></p>
+                <div className="mb-3">
+                    <label htmlFor="color" className="form-label">Color:</label>
+                        <select name="color" className={`form-select`} value={newFile.color} onChange={(e) => { setNewFile({ ...newFile, color: e.target.value });}}>
+                            <option value="default">default</option>
+                            <option value="primary">Primary</option>
+                            <option value="secondary">Secondary</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="accent">Accent</option>
+                        </select>
+                </div>
                 <p className="text-muted">{`You can upload files of maximum level ${levelFiles}`}</p>
                 <div>
                     <FileUploader
                         multiple={true}
-                        handleChange={handleChange}
-                        name="file"
+                        handleChange={handleFileChange}
+                        name="files"
                         types={typeFiles}
                         uploadedLabel={file ? `${fileNames.join(", ")}` : "Uploaded Successfully"}
                         maxSize={maxSizeFiles}
@@ -276,7 +317,6 @@ export default function DashboardContent({alert = ''}: any) {
                     </div>
                 </div>
                 </ModalBox>
-            </FolderUrlContext.Provider>
         </>
     );
 }

@@ -4,12 +4,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ViewFileController;
 use App\Http\Controllers\FolderController;
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
-Route::get('/', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -25,5 +22,15 @@ Route::get('/getfoldersuser', [FolderController::class, 'getfoldersUser'])
 
 Route::post('/storefolder', [FolderController::class, 'store'])
     ->name('storefolder');
+
+Route::post('/storefile', [FileController::class, 'store'])
+    ->name('storefile');
+
+Route::redirect('/', '/home')->middleware(['auth', 'verified']);
+
+Route::get('/home/{any?}', [DashboardController::class, 'index'])
+    ->where('any', '.*')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 require __DIR__.'/auth.php';
