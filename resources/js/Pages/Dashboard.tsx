@@ -10,8 +10,7 @@ import { FaXmark, FaFile, FaFolderClosed } from 'react-icons/fa6';
 export default function Dashboard() {
 
     let actualFolderPath = "home/";
-
-    const user = usePage().props.user ?? {name:'?', email: ''};
+    const user = usePage().props.user ?? { name: '?', email: '' };
     const dataAccount = usePage().props.dataAccount ?? { account_type: { total_storage: 0, max_size_files:0 } };
     const dataTypeAccount: any = dataAccount.account_type;
     const maxSizeFiles: number = dataTypeAccount.max_size_files;

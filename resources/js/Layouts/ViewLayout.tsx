@@ -7,7 +7,6 @@ export default function ViewLayout({
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
 
-
     return (
         <>
             <div className="layout flex-column w-100">
