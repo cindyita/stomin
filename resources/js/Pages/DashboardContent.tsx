@@ -5,12 +5,12 @@ import { Head, usePage,router, Link } from '@inertiajs/react';
 import ModalBox from '@/Components/ModalBox';
 import { FileUploader } from "react-drag-drop-files";
 import { useEffect, useState } from 'react';
-import { FaXmark, FaFile, FaFolderClosed } from 'react-icons/fa6';
+import { FaXmark, FaFile, FaFolderClosed, FaMagnifyingGlass } from 'react-icons/fa6';
 
 import Alert from '@/Components/Alert';
 
 import axios from "axios";
-import { Spinner } from 'react-bootstrap';
+import { Button, Collapse, Spinner } from 'react-bootstrap';
 
 export default function DashboardContent({ alert = '' }: any) {
     
@@ -180,6 +180,20 @@ export default function DashboardContent({ alert = '' }: any) {
         });
     }, [actualFolderPath]);
 
+    const [searchCollapse, setSearchCollapse] = useState(false);
+
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filteredFolders, setFilteredFolders] = useState(folders);
+
+    useEffect(() => {
+        if(searchTerm === "") {
+            setFilteredFolders(folders);
+            return;
+        }
+        const filtered = folders.filter((folder: any) =>
+            folder.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        setFilteredFolders(filtered);
+    }, [searchTerm]);
 
     return (
         <>
@@ -198,16 +212,27 @@ export default function DashboardContent({ alert = '' }: any) {
                 </div>    
                     
                 <Head title="Dashboard" />
-                    
-                <div className="breadcrumb w-100">
-                    {allFoldersPath.map((folder:string, index:number) => {
-                        const path = allFoldersPath.slice(0, index + 1).join('/');
-                        return (
-                            <Link key={path} href={`/`+path} className="pathUrl">
-                                {folder}/
-                            </Link>
-                        );
-                    })}
+                <div className="d-flex justify-content-between flex-column flex-md-row gap-1 mb-3">
+                    <div className="breadcrumb w-100">
+                        {allFoldersPath.map((folder:string, index:number) => {
+                            const path = allFoldersPath.slice(0, index + 1).join('/');
+                            return (
+                                <Link key={path} href={`/`+path} className="pathUrl">
+                                    {folder}/
+                                </Link>
+                            );
+                        })}
+                    </div>
+                    <div className="d-flex gap-2 align-items-start">
+                        <div className="mt-1"><Button className="btn-search"
+                            onClick={() => setSearchCollapse(!searchCollapse)}
+                            aria-controls="example-collapse-text"
+                            aria-expanded={searchCollapse}
+                        ><FaMagnifyingGlass /></Button></div>
+                        <Collapse in={searchCollapse} dimension="width">
+                            <div id="example-collapse-text"><div className="content-input-collapse"><input type="text" className="form-control" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} /></div></div>
+                        </Collapse>
+                    </div>
                 </div>
 
                     <div className="content">
@@ -216,15 +241,23 @@ export default function DashboardContent({ alert = '' }: any) {
                                 <span className="visually-hidden">Loading...</span>
                             </Spinner>
                         }
-                        {folders && !foldersLoading && folders.map((folder: any, index: number) => (
-                        <Folder
-                            key={index}
-                            color={folder.color}
-                            typeShare={folder.type_share}
-                            href={`/`+folder.location + folder.name}
-                        >{folder.name}</Folder>
-                        ))    
-                    }
+                        {folders && !foldersLoading && (
+                        (searchTerm === "" ? folders : filteredFolders).length > 0 ? (
+                            (searchTerm === "" ? folders : filteredFolders).map((folder: any, index: number) => (
+                            <Folder
+                                key={index}
+                                color={folder.color}
+                                typeShare={folder.type_share}
+                                href={`/` + folder.location + folder.name}
+                            >
+                                {folder.name}
+                            </Folder>
+                            ))
+                        ) : (
+                            <p>No results</p>
+                        )
+                        )}
+
                     
                         {
                             folders.length < 1 && !foldersLoading && <div className="no-data">

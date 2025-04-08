@@ -441,6 +441,16 @@ a {
   background: var(--secondary) !important;
 }
 
+.btn.btn-search {
+  background: var(--fontBox) !important;
+  border: 2px solid var(--primary) !important;
+  color: var(--primary);
+  padding: 3px 7px 4px;
+}
+.btn.btn-search:hover {
+  background: var(--secondary) !important;
+}
+
 .normal-link {
   color: var(--text);
   text-decoration: none;
@@ -621,6 +631,7 @@ a {
   justify-content: flex-start;
   align-items: center;
   padding: 4px 0;
+  margin: 0;
 }
 
 .pathUrl {
@@ -631,6 +642,15 @@ a {
 }
 .pathUrl:hover {
   color: var(--secondary);
+}
+
+.content-input-collapse {
+  width: 200px;
+}
+@media (max-width: 350px) {
+  .content-input-collapse {
+    width: 100%;
+  }
 }
 
 /*------------------------------------*/

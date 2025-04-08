@@ -10,7 +10,7 @@ export default function Folder({ children, color, href, favorite = false,typeSha
             <ElementDropdown />
             <FavoriteElement favorite={favorite} />
             <ShareElement typeShare={typeShare} />
-            <Link href={href} className="d-flex flex-column align-items-center">
+            <Link href={href} className="d-flex flex-row flex-md-column align-items-center gap-2 gap-md-0">
                 <div className={`icon ${color}`}>
                     <IoFolder />
                 </div>

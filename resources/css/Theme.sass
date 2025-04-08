@@ -394,6 +394,15 @@ a
     &:hover
         background: var(--secondary) !important
 
+.btn.btn-search
+    background: var(--fontBox) !important
+    border: 2px solid var(--primary) !important
+    color: var(--primary)
+    padding: 3px 7px 4px
+
+    &:hover
+        background: var(--secondary) !important
+
 .normal-link
     color: var(--text)
     text-decoration: none
@@ -545,6 +554,7 @@ a
     justify-content: flex-start
     align-items: center
     padding: 4px 0
+    margin:0
 .pathUrl
     cursor: pointer
     background-color: var(--secondaryBox)
@@ -552,6 +562,11 @@ a
     border: 1px solid var(--font)
     &:hover
         color: var(--secondary)
+
+.content-input-collapse
+    width: 200px
+    @media (max-width: 350px)
+        width: 100%
 /*------------------------------------*/
 // ESPECIAL CLASS
 .min-100
