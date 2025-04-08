@@ -9,6 +9,7 @@
     --font: rgb(22, 19, 44)
     --fontBox: rgb(33, 28, 82)
     --fontBox2: rgb(23, 20, 54)
+    --secondaryBox: rgba(51, 35, 128, 0.521)
     --text: #ffffff
     --textReverse: #000000
     --textAccent: rgb(255, 228, 75)
@@ -223,14 +224,22 @@ a
         background-color: var(--tertiary)
         cursor: pointer
 
-    .icon
+    .icon,.icon.primary
         font-size: 40px
+    
+    .icon.primary
         color: var(--primary)
     
-    .icon.pink
+    .icon.secondary
         color: var(--secondary)
     
-    .icon.green
+    .icon.tertiary
+        color: var(--tertiary)
+    
+    .icon.yellow
+        color: var(--yellow)
+    
+    .icon.accent
         color: var(--accent)
     
     .title
@@ -529,7 +538,20 @@ a
         color: var(--text)
         border: 2px solid #ff5959
     
-
+/*------------------------------------*/
+// BREADCRUMBS
+.breadcrumb
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    padding: 4px 0
+.pathUrl
+    cursor: pointer
+    background-color: var(--secondaryBox)
+    padding: 4px
+    border: 1px solid var(--font)
+    &:hover
+        color: var(--secondary)
 /*------------------------------------*/
 // ESPECIAL CLASS
 .min-100

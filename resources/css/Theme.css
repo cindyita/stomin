@@ -8,6 +8,7 @@
   --font: rgb(22, 19, 44);
   --fontBox: rgb(33, 28, 82);
   --fontBox2: rgb(23, 20, 54);
+  --secondaryBox: rgba(51, 35, 128, 0.521);
   --text: #ffffff;
   --textReverse: #000000;
   --textAccent: rgb(255, 228, 75);
@@ -247,14 +248,22 @@ a {
   background-color: var(--tertiary);
   cursor: pointer;
 }
-.folder .icon, .file .icon {
+.folder .icon, .folder .icon.primary, .file .icon, .file .icon.primary {
   font-size: 40px;
+}
+.folder .icon.primary, .file .icon.primary {
   color: var(--primary);
 }
-.folder .icon.pink, .file .icon.pink {
+.folder .icon.secondary, .file .icon.secondary {
   color: var(--secondary);
 }
-.folder .icon.green, .file .icon.green {
+.folder .icon.tertiary, .file .icon.tertiary {
+  color: var(--tertiary);
+}
+.folder .icon.yellow, .file .icon.yellow {
+  color: var(--yellow);
+}
+.folder .icon.accent, .file .icon.accent {
   color: var(--accent);
 }
 .folder .title, .file .title {
@@ -604,6 +613,24 @@ a {
   background-color: #ff1f1f;
   color: var(--text);
   border: 2px solid #ff5959;
+}
+
+/*------------------------------------*/
+.breadcrumb {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.pathUrl {
+  cursor: pointer;
+  background-color: var(--secondaryBox);
+  padding: 4px;
+  border: 1px solid var(--font);
+}
+.pathUrl:hover {
+  color: var(--secondary);
 }
 
 /*------------------------------------*/

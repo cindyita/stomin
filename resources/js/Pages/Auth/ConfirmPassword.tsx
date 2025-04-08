@@ -37,7 +37,7 @@ export default function ConfirmPassword() {
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full form-control"
                         isFocused={true}
                         onChange={(e) => setData('password', e.target.value)}
                     />

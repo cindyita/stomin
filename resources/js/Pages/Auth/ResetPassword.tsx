@@ -41,7 +41,7 @@ export default function ResetPassword({
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full form-control"
                         autoComplete="username"
                         onChange={(e) => setData('email', e.target.value)}
                     />

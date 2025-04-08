@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ViewFileController;
+use App\Http\Controllers\FolderController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -18,5 +19,11 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/viewfile', [ViewFileController::class, 'index'])
     ->name('viewfile');
+
+Route::get('/getfoldersuser', [FolderController::class, 'getfoldersUser'])
+    ->name('getfolersuser');
+
+Route::post('/storefolder', [FolderController::class, 'store'])
+    ->name('storefolder');
 
 require __DIR__.'/auth.php';
