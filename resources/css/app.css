@@ -39,7 +39,7 @@ textarea:focus,
 input.form-control:focus,
 select.form-control:focus,
 textarea.form-control:focus,
-a:focus {
+a:focus,.btn-close:focus {
     outline: none;
     outline-width: 0;
     box-shadow: none;

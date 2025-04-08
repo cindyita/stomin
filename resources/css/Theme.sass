@@ -10,6 +10,7 @@
     --fontBox: rgb(33, 28, 82)
     --fontBox2: rgb(23, 20, 54)
     --text: #ffffff
+    --textReverse: #000000
     --textAccent: rgb(255, 228, 75)
     --fontOpacity: 0.50
     --boxRadius: 15px
@@ -354,7 +355,8 @@ a
     background-position: right 10px center !important
     background-size: 16px 16px !important
     padding-right: 30px !important
-
+.border-danger
+    border: 2px solid red !important
 
 /*------------------------------------*/
 // BOTONES
@@ -365,6 +367,9 @@ a
 
     &:hover
         background: var(--secondary) !important
+    
+    &:disabled
+        opacity: 0.4 !important
 
 .btn.btn-danger
     background: #aa0f0f !important
@@ -428,6 +433,7 @@ a
     .modal-footer
         border-top:0
     .btn-close
+        cursor: pointer
         color: var(--text)
         background:transparent
         --bs-btn-close-bg: transparent
@@ -475,6 +481,55 @@ a
 .icon-folder
     font-size: 50px
     margin-bottom: 5px
+
+/*------------------------------------*/
+//ALERTS
+.alert-zone
+    position: absolute
+    bottom: 10px
+    left: 14px
+    z-index: 9999
+    height: auto
+    @media (max-width: 768px)
+        position: fixed
+
+.alert-content
+    display: flex
+    justify-content: flex-start
+    align-items: flex-start
+    .alert
+        border-radius: var(--boxRadius)
+        .alert-text
+            margin-top:10px
+        .btn-close:focus
+            outline: none !important
+            outline-width: 0 !important
+            box-shadow: none !important
+            -moz-box-shadow: none !important
+            -webkit-box-shadow: none !important
+
+    .alert-primary
+        background-color: var(--primary)
+        color: var(--text)
+        border: 2px solid lightblue
+    .alert-success
+        background-color: var(--accent)
+        color: var(--font)
+        border: 2px solid lightgreen
+    .alert-info
+        background-color: white
+        color: var(--font)
+        border: 2px solid var(--fontBox)
+    .alert-warning
+        background-color: var(--yellow)
+        color: var(--font)
+        border: 2px solid lightyellow
+    .alert-danger
+        background-color: #ff1f1f
+        color: var(--text)
+        border: 2px solid #ff5959
+    
+
 /*------------------------------------*/
 // ESPECIAL CLASS
 .min-100
@@ -485,3 +540,13 @@ a
 
 .cursor-pointer
     cursor: pointer
+
+/*------------------------------------*/
+// ANIMATIONS
+.fade-out
+  opacity: 0
+  transition: opacity 0.3s ease-out
+
+.fade-in 
+  opacity: 1
+  transition: opacity 0.3s ease-in

@@ -9,6 +9,7 @@
   --fontBox: rgb(33, 28, 82);
   --fontBox2: rgb(23, 20, 54);
   --text: #ffffff;
+  --textReverse: #000000;
   --textAccent: rgb(255, 228, 75);
   --fontOpacity: 0.50;
   --boxRadius: 15px;
@@ -398,6 +399,10 @@ a {
   padding-right: 30px !important;
 }
 
+.border-danger {
+  border: 2px solid red !important;
+}
+
 /*------------------------------------*/
 .btn {
   border-radius: var(--boxRadius) !important;
@@ -406,6 +411,9 @@ a {
 }
 .btn:hover {
   background: var(--secondary) !important;
+}
+.btn:disabled {
+  opacity: 0.4 !important;
 }
 
 .btn.btn-danger {
@@ -481,6 +489,7 @@ a {
   border-top: 0;
 }
 .modal .btn-close {
+  cursor: pointer;
   color: var(--text);
   --bs-btn-close-bg: transparent;
   width: auto;
@@ -540,6 +549,64 @@ a {
 }
 
 /*------------------------------------*/
+.alert-zone {
+  position: absolute;
+  bottom: 10px;
+  left: 14px;
+  z-index: 9999;
+  height: auto;
+}
+@media (max-width: 768px) {
+  .alert-zone {
+    position: fixed;
+  }
+}
+
+.alert-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.alert-content .alert {
+  border-radius: var(--boxRadius);
+}
+.alert-content .alert .alert-text {
+  margin-top: 10px;
+}
+.alert-content .alert .btn-close:focus {
+  outline: none !important;
+  outline-width: 0 !important;
+  box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+.alert-content .alert-primary {
+  background-color: var(--primary);
+  color: var(--text);
+  border: 2px solid lightblue;
+}
+.alert-content .alert-success {
+  background-color: var(--accent);
+  color: var(--font);
+  border: 2px solid lightgreen;
+}
+.alert-content .alert-info {
+  background-color: white;
+  color: var(--font);
+  border: 2px solid var(--fontBox);
+}
+.alert-content .alert-warning {
+  background-color: var(--yellow);
+  color: var(--font);
+  border: 2px solid lightyellow;
+}
+.alert-content .alert-danger {
+  background-color: #ff1f1f;
+  color: var(--text);
+  border: 2px solid #ff5959;
+}
+
+/*------------------------------------*/
 .min-100 {
   min-height: 100%;
 }
@@ -550,4 +617,15 @@ a {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+/*------------------------------------*/
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
 }/*# sourceMappingURL=Theme.css.map */
