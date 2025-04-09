@@ -7,6 +7,7 @@ use App\Models\DataAccount;
 use App\Models\Folder;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
 
 class FolderController extends Controller
 {
@@ -69,6 +70,12 @@ class FolderController extends Controller
             'type_share' => 'none',
             'id_user_add' => $user->id 
         ]);
+
+        $path = './public/storage/archives/' . $dataAccount->id . "/home/" . $validatedData['name'];
+
+        if (!Storage::exists($path)) {
+            Storage::makeDirectory($path);
+        }
 
         return redirect()->back()->with('message', 'Folder created')->with('typeAlert', 'success');
     }

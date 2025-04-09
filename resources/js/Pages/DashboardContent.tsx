@@ -21,6 +21,7 @@ export default function DashboardContent({ alert = '' }: any) {
 
     const allFoldersPath = ["home", ...routeFolder];
     let actualFolderPath = allFoldersPath.length > 1 ? allFoldersPath.join('/') + '/' : 'home/';
+    let updateFolders = '';
 
     const [folders, setFolders] = useState([]);
     const [foldersLoading, setFoldersLoading] = useState(true);
@@ -117,6 +118,8 @@ export default function DashboardContent({ alert = '' }: any) {
             color: '',
         });
 
+        updateFolders = "1";
+
         router.post('/storefolder', newFolder);
     }
 
@@ -178,7 +181,7 @@ export default function DashboardContent({ alert = '' }: any) {
             console.error(error);
             setFoldersLoading(false);
         });
-    }, [actualFolderPath]);
+    }, [actualFolderPath,updateFolders]);
 
     const [searchCollapse, setSearchCollapse] = useState(false);
 

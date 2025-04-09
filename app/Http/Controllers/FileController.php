@@ -36,7 +36,8 @@ class FileController extends Controller
         ]);
 
         $files = $request->file('files');
-        $accountFolderPath = './public/storage/archives/' . $dataAccount->id;
+        $location = $validatedData['location'] ?? 'home/';
+        $accountFolderPath = './public/storage/archives/' . $dataAccount->id.'/'.$location;
 
         if (!Storage::exists($accountFolderPath)) {
             Storage::makeDirectory($accountFolderPath);
@@ -59,7 +60,7 @@ class FileController extends Controller
 
             Files::create([
                 'id_account' => $dataAccount->id,
-                'location' => $validatedData['location'] ?? null,
+                'location' => $location,
                 'name' => $fileName,
                 'extension' => $extension,
                 'type_mime' => $typeMime,
