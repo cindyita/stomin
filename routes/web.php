@@ -18,13 +18,20 @@ Route::get('/viewfile', [ViewFileController::class, 'index'])
     ->name('viewfile');
 
 Route::get('/getfoldersuser', [FolderController::class, 'getfoldersUser'])
-    ->name('getfolersuser');
+    ->name('getfoldersuser');
 
 Route::post('/storefolder', [FolderController::class, 'store'])
     ->name('storefolder');
 
 Route::post('/storefile', [FileController::class, 'store'])
     ->name('storefile');
+
+Route::get('/getfilesuser', [FileController::class, 'getfilesuser'])
+    ->name('getfilesuser');
+
+Route::get('/togglefavoritefile', [FileController::class, 'togglefavoritefile'])->name('togglefavoritefile');
+
+Route::get('/togglefavoritefolder', [FolderController::class, 'togglefavoritefolder'])->name('togglefavoritefolder');
 
 Route::redirect('/', '/home')->middleware(['auth', 'verified']);
 

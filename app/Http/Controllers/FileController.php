@@ -37,7 +37,7 @@ class FileController extends Controller
 
         $files = $request->file('files');
         $location = $validatedData['location'] ?? 'home/';
-        $accountFolderPath = './public/storage/archives/' . $dataAccount->id.'/'.$location;
+        $accountFolderPath = '/archives/' . $dataAccount->id . '/' . $location;
 
         if (!Storage::exists($accountFolderPath)) {
             Storage::makeDirectory($accountFolderPath);
@@ -76,4 +76,60 @@ class FileController extends Controller
 
         return redirect()->back()->with('message', 'Files uploaded successfully')->with('typeAlert', 'success');
     }
+
+    public function getfilesuser(Request $request){
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        $dataAccount = DataAccount::where('id_user', $user->id)
+            ->with('accountType')
+            ->first();
+
+        if (!$dataAccount) {
+            return response()->json(['message' => 'Account not found'], 404);
+        }
+
+        $url = $request->query('url');
+
+        $filesUserInUrl = Files::where('id_account', $dataAccount->id)
+        ->where('location',$url)
+        ->get();
+
+        return $filesUserInUrl;
+    }
+
+    public function togglefavoritefile(Request $request) {
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        // $dataAccount = DataAccount::where('id_user', $user->id)
+        //     ->with('accountType')
+        //     ->first();
+
+        // if (!$dataAccount) {
+        //     return response()->json(['message' => 'Account not found'], 404);
+        // }
+
+        $id = $request->query('id');
+        $favorite = $request->query('favorite');
+
+        $file = Files::where('id', $id)->first();
+
+        if (!$file) {
+            return response()->json(['message' => 'File not found'], 404);
+        }
+
+        $file->favorite = $favorite;
+        $file->save();
+
+        // return redirect()->back()->with('message', 'Favorite status updated successfully')->with('typeAlert', 'success');
+        return json_encode($favorite);
+    }
+
 }

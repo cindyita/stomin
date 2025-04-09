@@ -2,10 +2,11 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import OpenModal from '@/Components/OpenModal';
 import { Link, usePage } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode, useState } from 'react';
-import { FaUser } from 'react-icons/fa';
-import { FaFileArrowUp } from 'react-icons/fa6';
+import { FaShareAltSquare, FaUser } from 'react-icons/fa';
+import { FaBuilding, FaFileArrowUp, FaLink, FaQrcode, FaTags } from 'react-icons/fa6';
 import { GrStorage } from 'react-icons/gr';
-import { IoDocumentSharp, IoFileTraySharp, IoFolder, IoFunnel, IoLogOut, IoSettings, IoStar, IoTrash } from 'react-icons/io5';
+import { HiPresentationChartBar } from 'react-icons/hi';
+import { IoColorPalette, IoDocumentSharp, IoFileTraySharp, IoFolder, IoFunnel, IoLogOut, IoSettings, IoStar, IoTrash } from 'react-icons/io5';
 import { MdCreateNewFolder } from 'react-icons/md';
 import { RiDashboard3Fill } from 'react-icons/ri';
 
@@ -37,9 +38,12 @@ export default function Authenticated({
                             <div className="nav">
                                 <nav>
                                     <a className="active"><IoFileTraySharp /></a>
-                                    <a><IoStar /></a>
-                                    <a><IoFolder /></a>
-                                    <a><IoDocumentSharp /></a>
+                                    {/* <a><FaTags /></a>*/}
+                                    <a><FaLink /></a>
+                                    <a><HiPresentationChartBar /></a>
+                                    <a><FaBuilding /></a>
+                                    {/* <a><FaQrcode /></a> */}
+                                    <a><IoColorPalette /></a>
                                     <a><IoTrash /></a>
                                     <a><IoSettings /></a>
                                 </nav>

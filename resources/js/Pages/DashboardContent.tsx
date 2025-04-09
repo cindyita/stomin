@@ -21,10 +21,9 @@ export default function DashboardContent({ alert = '' }: any) {
 
     const allFoldersPath = ["home", ...routeFolder];
     let actualFolderPath = allFoldersPath.length > 1 ? allFoldersPath.join('/') + '/' : 'home/';
-    let updateFolders = '';
 
     const [folders, setFolders] = useState([]);
-    const [foldersLoading, setFoldersLoading] = useState(true);
+    const [files, setFiles] = useState([]);
 
     const user = usePage().props.user ?? { name: '?', email: '' };
     const dataAccount = usePage().props.dataAccount ?? { account_type: { total_storage: 0, max_size_files:0 } };
@@ -112,15 +111,16 @@ export default function DashboardContent({ alert = '' }: any) {
         }
         setErrors({});
 
+        router.post('/storefolder', newFolder);
+        
+        fetchData();
+
         setNewFolder({
             name: '',
             location: actualFolderPath,
             color: '',
         });
-
-        updateFolders = "1";
-
-        router.post('/storefolder', newFolder);
+        
     }
 
     function createFile(e:any) {
@@ -145,12 +145,15 @@ export default function DashboardContent({ alert = '' }: any) {
         }
 
         router.post('/storefile', formData);
-
+        
+        fetchData();
+        
         setNewFile({
             location: actualFolderPath,
             color: '',
             files: null
         });
+        
     }
 
     function showAlert(message: string, title:string = '',type:string = 'danger') {
@@ -168,41 +171,113 @@ export default function DashboardContent({ alert = '' }: any) {
         }, 5000);
     }
 
-    useEffect(() => {
-        if (alert?.message && alert.typeAlert) {
-            showAlert(alert.message, '', alert.typeAlert);
-        }
-    }, [alert]);
-
-    useEffect(() => {
-        setFoldersLoading(true);
-        axios.get('/getfoldersuser', {
-            params: { url: actualFolderPath }
-        })
-            .then((response) => {
-            setFolders(response.data);
-            setFoldersLoading(false);
-        })
-        .catch((error) => {
-            console.error(error);
-            setFoldersLoading(false);
-        });
-    }, [actualFolderPath,updateFolders]);
-
+    const [loading, setLoading] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filteredFolders, setFilteredFolders] = useState<any[]>([]);
+    const [filteredFiles, setFilteredFiles] = useState<any[]>([]);
     const [searchCollapse, setSearchCollapse] = useState(false);
 
-    const [searchTerm, setSearchTerm] = useState("");
-    const [filteredFolders, setFilteredFolders] = useState(folders);
+    // useEffect(() => {
+    //     if (alert?.message && alert.typeAlert) {
+    //         showAlert(alert.message, '', alert.typeAlert);
+    //     }
+    // }, [alert]);
+
+    // const fetchFolders = () => {
+    //     setFoldersLoading(true);
+    //     axios.get('/getfoldersuser', {
+    //         params: { url: actualFolderPath }
+    //     })
+    //     .then((response) => {
+    //         setFolders(response.data);
+    //         setFoldersLoading(false);
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //         setFoldersLoading(false);
+    //     });
+    // };
+
+    // useEffect(() => {
+    //     fetchFolders();
+    // }, [actualFolderPath]);
+
+    // const fetchFiles = () => {
+    //     setFilesLoading(true);
+    //     axios.get('/getfilesuser', {
+    //         params: { url: actualFolderPath }
+    //     })
+    //         .then((response) => {
+    //         setFiles(response.data);
+    //         setFilesLoading(false);
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //         setFilesLoading(false);
+    //     });
+    // };
+
+    // useEffect(() => {
+    //     fetchFiles();
+    // }, [actualFolderPath]);
+
+    const fetchData = () => {
+        console.log('Cargando información');
+        
+        setLoading(true);
+
+        const folderRequest = axios.get('/getfoldersuser', {
+            params: { url: actualFolderPath }
+        });
+
+        const fileRequest = axios.get('/getfilesuser', {
+            params: { url: actualFolderPath }
+        });
+
+        Promise.all([folderRequest, fileRequest])
+            .then(([foldersResponse, filesResponse]) => {
+                setFolders(foldersResponse.data);
+                setFiles(filesResponse.data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error(error);
+                setLoading(false);
+            });
+    };
 
     useEffect(() => {
-        if(searchTerm === "") {
+        fetchData();
+    }, [actualFolderPath]);
+
+    useEffect(() => {
+        if (searchTerm === "") {
             setFilteredFolders(folders);
+            setFilteredFiles(files);
             return;
         }
-        const filtered = folders.filter((folder: any) =>
-            folder.name.toLowerCase().includes(searchTerm.toLowerCase()));
-        setFilteredFolders(filtered);
-    }, [searchTerm]);
+
+        const filteredF = folders.filter((folder: any) =>
+            folder.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+        const filteredFileList = files.filter((file: any) =>
+            file.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+        setFilteredFolders(filteredF);
+        setFilteredFiles(filteredFileList);
+    }, [searchTerm, folders, files]);
+
+    // useEffect(() => {
+    //     if(searchTerm === "") {
+    //         setFilteredFolders(folders);
+    //         return;
+    //     }
+    //     const filtered = folders.filter((folder: any) =>
+    //         folder.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    //     setFilteredFolders(filtered);
+    // }, [searchTerm]);
 
     return (
         <>
@@ -244,34 +319,37 @@ export default function DashboardContent({ alert = '' }: any) {
                     </div>
                 </div>
 
-                    <div className="content">
-                        {
-                            foldersLoading && <Spinner animation="border" role="status" size="sm">
-                                <span className="visually-hidden">Loading...</span>
-                            </Spinner>
-                        }
-                        {folders && !foldersLoading && (
-                        (searchTerm === "" ? folders : filteredFolders).length > 0 ? (
-                            (searchTerm === "" ? folders : filteredFolders).map((folder: any, index: number) => (
-                            <Folder
-                                key={index}
-                                color={folder.color}
-                                typeShare={folder.type_share}
-                                href={`/` + folder.location + folder.name}
-                            >
-                                {folder.name}
-                            </Folder>
-                            ))
-                        ) : (
-                            <p>No results</p>
-                        )
-                        )}
+                <div className="content">
+                    {loading && <Spinner animation="border" role="status" size="sm">
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>}
 
-                    
-                        {
-                            folders.length < 1 && !foldersLoading && <div className="no-data">
-                                <span className="text-muted">Empty</span></div>
-                        }
+                    {!loading && (
+                        <>
+                            {/* FOLDERS */}
+                            {(searchTerm === "" ? folders : filteredFolders).length > 0 ? (
+                                (searchTerm === "" ? folders : filteredFolders).map((folder:any, i:number) => (
+                                    <Folder key={i} id={folder.id || 0} color={folder.color || ''} favorite={folder.favorite || 0} typeShare={folder.type_share || ''} href={`/` + folder.location + folder.name}>
+                                        {folder.name || ''}
+                                    </Folder>
+                                ))
+                            ) : (
+                                null
+                            )}
+
+                            {/* FILES */}
+                            {(searchTerm === "" ? files : filteredFiles).length > 0 ? (
+                                (searchTerm === "" ? files : filteredFiles).map((f, i) => (
+                                    <File key={i} id={f.id || 0}  color={f.color || ''} favorite={f.favorite || 0} typeShare={f.type_share || ''} href={`/` + f.location + f.name} typeMime={f.type_mime || ''}>
+                                        {f.name || ''}
+                                    </File>
+                                ))
+                            ) : (
+                                null
+                            )}
+                        </>
+                    )}
+
                     {/* <Folder color="pink">Folder 1</Folder>
                     <Folder color="green" typeShare='open'>Folder 2</Folder>
                     <Folder color="blue" favorite={true}>Folder 3 test test</Folder>
@@ -281,7 +359,7 @@ export default function DashboardContent({ alert = '' }: any) {
                     <File color="blue" type="jpg">File 4</File>
                     <File color="blue" type="jpg">File 5</File>
                     <File color="blue" type="jpg">File 6</File> */}
-                    </div>
+                </div>
             
             </MainLayout>
 
