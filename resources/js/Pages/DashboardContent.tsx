@@ -138,13 +138,19 @@ export default function DashboardContent({ alert = '' }: any) {
         }
         setErrors({});
 
+        const formData = {
+            location: newFile.location,
+            color: newFile.color,
+            files: file
+        }
+
+        router.post('/storefile', formData);
+
         setNewFile({
             location: actualFolderPath,
             color: '',
-            files: file
+            files: null
         });
-
-        router.post('/storefile', newFile);
     }
 
     function showAlert(message: string, title:string = '',type:string = 'danger') {

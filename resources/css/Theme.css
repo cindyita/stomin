@@ -448,7 +448,8 @@ a {
   padding: 3px 7px 4px;
 }
 .btn.btn-search:hover {
-  background: var(--secondary) !important;
+  color: var(--secondary) !important;
+  border: 2px solid var(--secondary) !important;
 }
 
 .normal-link {

@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "TheBlux/StoMin",
+    "name": "theblux/stomin",
     "type": "project",
     "description": "Stomin private storage",
     "keywords": [

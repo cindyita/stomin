@@ -52,11 +52,11 @@ class FileController extends Controller
             $fileName = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
             $typeMime = $file->getMimeType();
-            $size = $file->size();
+            $size = $file->getSize();
 
-            $uniqueFileName = uniqid() . '.' . $extension;
+            //$fileName = $fileName . '.' . $extension;
 
-            $file->storeAs($accountFolderPath, $uniqueFileName);
+            $file->storeAs($accountFolderPath, $fileName);
 
             Files::create([
                 'id_account' => $dataAccount->id,
