@@ -1,9 +1,10 @@
-import { IoArrowBackCircle, IoColorPalette, IoEllipsisVertical, IoFolder, IoInformationCircle, IoPencil, IoShareSocial, IoTrash } from "react-icons/io5";
+import { useState } from "react";
+import { Link,router } from "@inertiajs/react";
+
+import { IoFolder } from "react-icons/io5";
 import ElementDropdown from "./ElementDropdown";
 import FavoriteElement from "./FavoriteElement";
 import ShareElement from "./ShareElement";
-import { Link,router } from "@inertiajs/react";
-import { useState } from "react";
 
 export default function Folder({ children,id, color, href, favorite = false, typeShare = 'none', ...props }: any) {
      const [clickedOnce, setClickedOnce] = useState(false);

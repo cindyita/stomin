@@ -15,6 +15,7 @@ export default forwardRef(function TextInput(
     }: InputHTMLAttributes<HTMLInputElement> & { isFocused?: boolean },
     ref,
 ) {
+    
     const localRef = useRef<HTMLInputElement>(null);
 
     useImperativeHandle(ref, () => ({

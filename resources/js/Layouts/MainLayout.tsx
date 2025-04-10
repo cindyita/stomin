@@ -1,14 +1,17 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import OpenModal from '@/Components/OpenModal';
-import { Link, usePage } from '@inertiajs/react';
+// REACT AND INERTIA
 import { PropsWithChildren, ReactNode, useState } from 'react';
-import { FaShareAltSquare, FaUser } from 'react-icons/fa';
-import { FaBuilding, FaFileArrowUp, FaLink, FaQrcode, FaTags } from 'react-icons/fa6';
+import { Link, usePage } from '@inertiajs/react';
+// ICONS
+import { FaUser } from 'react-icons/fa';
+import { FaBuilding, FaFileArrowUp, FaLink } from 'react-icons/fa6';
 import { GrStorage } from 'react-icons/gr';
 import { HiPresentationChartBar } from 'react-icons/hi';
-import { IoColorPalette, IoDocumentSharp, IoFileTraySharp, IoFolder, IoFunnel, IoLogOut, IoSettings, IoStar, IoTrash } from 'react-icons/io5';
+import { IoColorPalette, IoFileTraySharp, IoFunnel, IoLogOut, IoSettings, IoTrash } from 'react-icons/io5';
 import { MdCreateNewFolder } from 'react-icons/md';
 import { RiDashboard3Fill } from 'react-icons/ri';
+// COMPONENTS
+import ApplicationLogo from '@/Components/ApplicationLogo';
+import OpenModal from '@/Components/OpenModal';
 
 export default function Authenticated({
     header,
@@ -22,12 +25,9 @@ export default function Authenticated({
     const dataAccount = usePage().props.dataAccount ?? { account_type: { total_storage: 0 } };
     
     const dataTypeAccount = dataAccount.account_type;
-    const total_storage = (dataTypeAccount.total_storage / 1000); // Convert to GB
+    const total_storage = (dataTypeAccount.total_storage / 1000); // to GB
     const storage_usage = 2000;
     const percentage_usage = (storage_usage / dataTypeAccount.total_storage) * 100;
-    
-    const [showingNavigationDropdown, setShowingNavigationDropdown] =
-        useState(false);
 
     return (
         <>

@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useState } from "react";
+import axios from "axios";
 import { IoStar } from "react-icons/io5";
 
 export default function FavoriteElement({ id, type, favorite = false, ...props }: any) {

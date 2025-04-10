@@ -1,6 +1,7 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Link } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode, useState } from 'react';
+import { Link } from '@inertiajs/react';
+
+import ApplicationLogo from '@/Components/ApplicationLogo';
 
 export default function ViewLayout({
     header,

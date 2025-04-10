@@ -7,6 +7,7 @@ export default function SecondaryButton({
     children,
     ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
+    
     return (
         <button
             {...props}

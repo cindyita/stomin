@@ -1,6 +1,7 @@
 import { IoEllipsisVertical } from "react-icons/io5";
 
-export default function Dropdown({ children,id,...props }: any) {
+export default function Dropdown({ children, id, ...props }: any) {
+    
     return (
         <>
             <div className="dropdown " {...props}>

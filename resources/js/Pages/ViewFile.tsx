@@ -1,5 +1,5 @@
-import ViewLayout from "@/Layouts/ViewLayout";
 import { Head, usePage } from "@inertiajs/react";
+import ViewLayout from "@/Layouts/ViewLayout";
 
 export default function ViewFile() {
 

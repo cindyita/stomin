@@ -1,16 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 
-/**
- *
- *
- * @export
- * @param {(InertiaLinkProps & { type: string })} {
- *     title = 'Alert', // title of the alert
- *     type = 'primary', //success, primary, warning, danger
- *     children, // content of the alert
- *     ...props }
- * @return {*} 
- */
 export default function Alert({
     title= 'Alert',
     type = 'primary',

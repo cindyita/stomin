@@ -6,6 +6,7 @@ export default function DangerButton({
     children,
     ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
+    
     return (
         <button
             {...props}

@@ -6,6 +6,7 @@ export default function PrimaryButton({
     children,
     ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
+    
     return (
         <button
             {...props}

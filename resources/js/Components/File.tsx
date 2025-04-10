@@ -1,10 +1,12 @@
+import { useState } from "react";
+import { usePage } from "@inertiajs/react";
+
 import { FaFileImage, FaFileLines, FaFilePdf } from "react-icons/fa6";
+
 import ElementDropdown from "./ElementDropdown";
 import FavoriteElement from "./FavoriteElement";
 import ShareElement from "./ShareElement";
 import OpenModal from "./OpenModal";
-import { usePage } from "@inertiajs/react";
-import { useState } from "react";
 
 export default function File({ children,id, color, type = 'file', favorite = false, typeShare = 'none', href = '', typeMime = '', ...props }: any) {
 

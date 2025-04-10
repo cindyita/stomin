@@ -1,6 +1,5 @@
-import { ModalContext } from '@/Contexts/ModalContext';
 import { PropsWithChildren, useContext } from 'react';
-
+import { ModalContext } from '@/Contexts/ModalContext';
 
 export default function OpenModal({
     id,
@@ -8,6 +7,7 @@ export default function OpenModal({
     children,
     ...props
 }: PropsWithChildren & { id: string, className?: string }) {
+    
     const modalContext = useContext(ModalContext);
 
     if (!modalContext) {
