@@ -31,7 +31,7 @@ export default function File({ children,id, color, type = 'file', favorite = fal
     return (
         <>
             <div className='file element' {...props}>
-                <ElementDropdown />
+                <ElementDropdown idItem={id} type='file' />
                 <FavoriteElement id={id} type='file' favorite={favorite} />
                 <ShareElement typeShare={typeShare} />
                 {/* <OpenModal id="view-file"> */}

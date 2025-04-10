@@ -14,10 +14,6 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
-
         $routeFolder = $path ? explode('/', $path) : [];
 
         $dataAccount = DataAccount::where('id_user', $user->id)

@@ -1,11 +1,8 @@
-import DangerButton from '@/Components/DangerButton';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import Modal from '@/Components/ModalBox';
-import SecondaryButton from '@/Components/SecondaryButton';
-import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/Form/InputError';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler, useRef, useState } from 'react';
+import OpenModal from '@/Components/OpenModal';
+import ModalBox from '@/Components/ModalBox';
 
 export default function DeleteUserForm({
     className = '',
@@ -52,12 +49,12 @@ export default function DeleteUserForm({
     return (
         <section className={`space-y-6 ${className}`}>
 
-            <DangerButton data-bs-toggle="modal" data-bs-target="#confirmingUserDeletion">
+            <OpenModal className="btn btn-danger" id="confirmingUserDeletion">
                 Delete Account
-            </DangerButton>
+            </OpenModal>
 
             { /* Modales */}
-            <Modal id="confirmingUserDeletion" title="Confirm delete" saveBtn="">
+            <ModalBox id="confirmingUserDeletion" title="Confirm delete" saveBtn="">
                 <form onSubmit={deleteUser} className="p-6">
                     <h4>
                         Are you sure you want to delete your account?
@@ -95,16 +92,16 @@ export default function DeleteUserForm({
                     </div>
 
                     <div className="mt-6 d-flex justify-content-end">
-                        <SecondaryButton data-bs-dismiss="modal">
+                        <button className="btn btn-muted" data-bs-dismiss="modal">
                             Cancel
-                        </SecondaryButton>
+                        </button>
 
-                        <DangerButton className="ms-3" disabled={processing}>
+                        <button className="ms-3 btn btn-danger" disabled={processing}>
                             Delete Account
-                        </DangerButton>
+                        </button>
                     </div>
                 </form>
-            </Modal>
+            </ModalBox>
         </section>
     );
 }

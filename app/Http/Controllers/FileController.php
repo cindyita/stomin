@@ -16,10 +16,6 @@ class FileController extends Controller
     {
         $user = Auth::user();
 
-        if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
-
         $dataAccount = DataAccount::where('id_user', $user->id)
             ->with('accountType')
             ->first();
@@ -102,11 +98,6 @@ class FileController extends Controller
     }
 
     public function togglefavoritefile(Request $request) {
-        $user = Auth::user();
-
-        if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
 
         // $dataAccount = DataAccount::where('id_user', $user->id)
         //     ->with('accountType')
@@ -130,6 +121,12 @@ class FileController extends Controller
 
         // return redirect()->back()->with('message', 'Favorite status updated successfully')->with('typeAlert', 'success');
         return json_encode($favorite);
+    }
+
+    function getInfoFile(Request $request){
+        $id = $request->query('id');
+        $file = Files::where('id', $id)->first();
+        return json_encode($file);
     }
 
 }

@@ -4,9 +4,11 @@ import { ModalContext } from '@/Contexts/ModalContext';
 export default function OpenModal({
     id,
     className = '',
+    itemId = 0,
+    itemType = '',
     children,
     ...props
-}: PropsWithChildren & { id: string, className?: string }) {
+}: PropsWithChildren & { id: string, itemId?:number, itemType?:string, className?: string }) {
     
     const modalContext = useContext(ModalContext);
 
@@ -14,10 +16,13 @@ export default function OpenModal({
         throw new Error('ModalContext is not provided');
     }
 
-    const { setModalId } = modalContext;
+    const { setModalId, setItemData } = modalContext;
 
     const openModal = () => {
-        setModalId(id); 
+        setModalId(id);
+        if (itemId && itemType) {
+            setItemData({ itemId: itemId, itemType: itemType });
+        }
     };
     
     return (

@@ -1,7 +1,6 @@
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/Form/InputError';
+import InputLabel from '@/Components/Form/InputLabel';
+import TextInput from '@/Components/Form/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
@@ -46,9 +45,9 @@ export default function ConfirmPassword() {
                 </div>
 
                 <div className="mt-4 flex items-center justify-end">
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                    <button className="ms-4 btn btn-primary" disabled={processing}>
                         Confirm
-                    </PrimaryButton>
+                    </button>
                 </div>
             </form>
         </GuestLayout>

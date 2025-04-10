@@ -17,21 +17,27 @@ Route::middleware('auth')->group(function () {
 Route::get('/viewfile', [ViewFileController::class, 'index'])
     ->name('viewfile');
 
-Route::get('/getfoldersuser', [FolderController::class, 'getfoldersUser'])
-    ->name('getfoldersuser');
+Route::middleware('auth')->group(function () {
+    Route::get('/getfoldersuser', [FolderController::class, 'getfoldersUser'])
+        ->name('getfoldersuser');
 
-Route::post('/storefolder', [FolderController::class, 'store'])
-    ->name('storefolder');
+    Route::post('/storefolder', [FolderController::class, 'store'])
+        ->name('storefolder');
 
-Route::post('/storefile', [FileController::class, 'store'])
-    ->name('storefile');
+    Route::post('/storefile', [FileController::class, 'store'])
+        ->name('storefile');
 
-Route::get('/getfilesuser', [FileController::class, 'getfilesuser'])
-    ->name('getfilesuser');
+    Route::get('/getfilesuser', [FileController::class, 'getfilesuser'])
+        ->name('getfilesuser');
 
-Route::get('/togglefavoritefile', [FileController::class, 'togglefavoritefile'])->name('togglefavoritefile');
+    Route::get('/togglefavoritefile', [FileController::class, 'togglefavoritefile'])->name('togglefavoritefile');
 
-Route::get('/togglefavoritefolder', [FolderController::class, 'togglefavoritefolder'])->name('togglefavoritefolder');
+    Route::get('/togglefavoritefolder', [FolderController::class, 'togglefavoritefolder'])->name('togglefavoritefolder');
+
+    Route::get('/getInfoFile',[FileController::class, 'getInfoFile'])->name('getInfoFile');
+
+    Route::get('/getInfoFolder',[FolderController::class, 'getInfoFolder'])->name('getInfoFolder');
+});
 
 Route::redirect('/', '/home')->middleware(['auth', 'verified']);
 

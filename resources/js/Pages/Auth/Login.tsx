@@ -1,8 +1,7 @@
-import Checkbox from '@/Components/Checkbox';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
+import Checkbox from '@/Components/Form/Checkbox';
+import InputError from '@/Components/Form/InputError';
+import InputLabel from '@/Components/Form/InputLabel';
+import TextInput from '@/Components/Form/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
@@ -81,10 +80,7 @@ export default function Login({
                         <Checkbox
                             name="remember"
                             checked={data.remember}
-                            onChange={(e) =>
-                                setData('remember', e.target.checked)
-                            }
-                        />
+                            onChange={(e) => setData('remember', e.target.checked)} textLabel={''}                        />
                         <span className="text-primary ps-1">
                             Recordar datos
                         </span>
@@ -101,9 +97,9 @@ export default function Login({
                         </Link>
                     )}
 
-                    <PrimaryButton disabled={processing}>
+                    <button className="btn btn-primary" disabled={processing}>
                         Iniciar sesión
-                    </PrimaryButton>
+                    </button>
                 </div>
             </form>
         </GuestLayout>

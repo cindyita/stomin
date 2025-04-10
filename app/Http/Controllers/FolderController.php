@@ -15,10 +15,6 @@ class FolderController extends Controller
     {
         $user = Auth::user();
 
-        if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
-
         $dataAccount = DataAccount::where('id_user', $user->id)
             ->with('accountType')
             ->first();
@@ -40,10 +36,6 @@ class FolderController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-
-        if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
 
         $dataAccount = DataAccount::where('id_user', $user->id)
             ->with('accountType')
@@ -81,11 +73,6 @@ class FolderController extends Controller
     }
 
     public function togglefavoritefolder(Request $request) {
-        $user = Auth::user();
-
-        if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
 
         // $dataAccount = DataAccount::where('id_user', $user->id)
         //     ->with('accountType')
@@ -109,5 +96,11 @@ class FolderController extends Controller
 
         //return redirect()->back()->with('message', 'Favorite status updated successfully')->with('typeAlert', 'success');
         return json_encode($favorite);
+    }
+
+    function getInfoFolder(Request $request){
+        $id = $request->query('id');
+        $folder = Folder::where('id', $id)->first();
+        return json_encode($folder);
     }
 }
