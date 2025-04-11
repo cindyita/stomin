@@ -129,4 +129,31 @@ class FileController extends Controller
         return json_encode($file);
     }
 
+    public function deleteFile(Request $request) {
+        try {
+            $id = $request->input('id');
+            $accountId = $request->input('accountId');
+
+            $file = Files::where('id', $id)
+                ->where('id_account', $accountId)
+                ->first();
+
+            if (!$file) {
+                return response()->json(['error' => 'File not found'], 404);
+            }
+
+            $file->delete();
+
+            return response()->json(['message' => 'success', 'file' => $file]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function editfile(Request $request){
+        //UPDATE FILE
+        $id = $request->input('id');
+        return response()->json(['id' => $id]);
+    }
+
 }

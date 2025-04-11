@@ -17,6 +17,10 @@ import UploadFilesModal from '@/Components/UploadFilesModal';
 import UploadFolderModal from '@/Components/UploadFolderModal';
 import InfoCardModal from '@/Components/InfoCardModal';
 import { RiGalleryView2, RiTableView } from 'react-icons/ri';
+import ViewCardModal from '@/Components/ViewCardModal';
+import DeleteElementModal from '@/Components/DeleteElementModal';
+import EditFolderModal from '@/Components/EditFolderModal';
+import EditFileModal from '@/Components/EditFileModal';
 
 export default function DashboardContent({ alert = '' }: any) {
     
@@ -215,7 +219,11 @@ export default function DashboardContent({ alert = '' }: any) {
             </MainLayout>
 
             { /* Modales */}
+            <ViewCardModal showAlert={showAlert} />
             <InfoCardModal showAlert={showAlert} />
+            <DeleteElementModal showAlert={showAlert} fetchData={fetchData} />
+            <EditFolderModal showAlert={showAlert} fetchData={fetchData} />
+            <EditFileModal showAlert={showAlert} fetchData={fetchData} />
 
             <UploadFolderModal actualFolderPath={actualFolderPath} showAlert={showAlert} fetchData={fetchData} />
 

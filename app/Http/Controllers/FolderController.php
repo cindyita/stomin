@@ -98,9 +98,37 @@ class FolderController extends Controller
         return json_encode($favorite);
     }
 
-    function getInfoFolder(Request $request){
+    public function getInfoFolder(Request $request) {
         $id = $request->query('id');
         $folder = Folder::where('id', $id)->first();
         return json_encode($folder);
     }
+
+    public function deleteFolder(Request $request) {
+        try {
+            $id = $request->input('id');
+            $accountId = $request->input('accountId');
+
+            $folder = Folder::where('id', $id)
+                ->where('id_account', $accountId)
+                ->first();
+
+            if (!$folder) {
+                return response()->json(['error' => 'Folder not found'], 404);
+            }
+
+            $folder->delete();
+
+            return response()->json(['message' => 'success', 'folder' => $folder]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function editfolder(Request $request){
+        //UPDATE FOLDER
+        $id = $request->input('id');
+        return response()->json(['id' => $id]);
+    }
+
 }

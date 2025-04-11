@@ -6,21 +6,17 @@ import { FaFileImage, FaFileLines, FaFilePdf } from "react-icons/fa6";
 import ElementDropdown from "./ElementDropdown";
 import FavoriteElement from "./FavoriteElement";
 import ShareElement from "./ShareElement";
-import OpenModal from "./OpenModal";
+import { isImageTypeMime } from "@/Functions/Functions";
 
 export default function File({ children,id, color, type = 'file', favorite = false, typeShare = 'none', href = '', typeMime = '', ...props }: any) {
 
     const dataAccount = usePage().props.dataAccount ?? { id:0 };
     
     const appURL = import.meta.env.VITE_APP_URL;
-    
-    const isImage = (mimeType: string) => {
-        return mimeType && mimeType.startsWith("image/");
-    };
 
     const [imageError, setImageError] = useState(false);
 
-    if (isImage(typeMime)) {
+    if (isImageTypeMime(typeMime)) {
         type = 'image';
     }
 
@@ -40,7 +36,7 @@ export default function File({ children,id, color, type = 'file', favorite = fal
                         <div className={`icon ${color}`}>
                             {type === 'image' ? (
                                 imageError ? (
-                                    <FaFileImage /> // Ícono si la imagen no se carga.
+                                    <FaFileImage />
                                 ) : (
                                     <img
                                         src={`${appURL}/storage/archives/${dataAccount.id}${href}`}

@@ -4,6 +4,7 @@ import { router } from "@inertiajs/react";
 import { FileUploader } from "react-drag-drop-files";
 import { FaFile, FaXmark } from "react-icons/fa6";
 import Alert from '@/Components/Alert';
+import { isImageFileName } from "@/Functions/Functions";
 
 export default function UploadFilesModal({ actualFolderPath, maxSizeFiles,typeFiles,levelFiles,showAlert, fetchData }: any) {
     
@@ -44,12 +45,6 @@ export default function UploadFilesModal({ actualFolderPath, maxSizeFiles,typeFi
         setUploadFile(updatedFiles);
         setPreviews(updatedPreviews);
         setUploadFileNames(updatedFileNames);
-    };
-
-    // CHECK IMAGE FILE FOR PREVIEW
-    const isImageFile = (fileName: string) => {
-        const fileExtension = fileName.split('.').pop()?.toLowerCase();
-        return ['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension || '');
     };
 
     // ERRORS IN CREATE
@@ -129,7 +124,7 @@ export default function UploadFilesModal({ actualFolderPath, maxSizeFiles,typeFi
                     <div style={{ display: "flex", gap: "10px", marginTop: "10px", flexWrap: "wrap" }}>
                         {previews.map((src, index) => (
                             <div key={index} style={{ position: 'relative' }}>
-                                {isImageFile(uploadFileNames[index]) ? (
+                                {isImageFileName(uploadFileNames[index]) ? (
                                     <img
                                         src={src}
                                         alt={`Preview ${index}`}

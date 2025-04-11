@@ -37,6 +37,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/getInfoFile',[FileController::class, 'getInfoFile'])->name('getInfoFile');
 
     Route::get('/getInfoFolder',[FolderController::class, 'getInfoFolder'])->name('getInfoFolder');
+
+    Route::delete('/deleteFolder',[FolderController::class, 'deleteFolder'])->name('deleteFolder');
+
+    Route::delete('/deleteFile',[FileController::class, 'deleteFile'])->name('deleteFile');
+
+    Route::post('/editfolder',[FolderController::class, 'editfolder'])->name('editfolder');
+
+    Route::post('/editfile',[FileController::class, 'editfile'])->name('editfile');
 });
 
 Route::redirect('/', '/home')->middleware(['auth', 'verified']);

@@ -21,7 +21,7 @@ export default function InfoCardModal({ showAlert }: any) {
     const [infoCardTitle, setInfoCardTitle] = useState('Info card');
     const [infoCardContent, setInfoCardContent] = useState<any>('');
 
-    const url = type == 'file' ? '/getInfoFile' : 'getInfoFolder';
+    const url = type == 'file' ? '/getInfoFile' : '/getInfoFolder';
 
     //VIEW INFO CARD (GET)
     const viewInfo = async () => {

@@ -29,7 +29,7 @@ export default function Folder({ children,id, color, href, favorite = false, typ
 
     return (
         <div className='folder element' {...props}>
-            <ElementDropdown idItem={id} type='folder' />
+            <ElementDropdown idItem={id} type='folder' view={false} />
             <FavoriteElement id={id} type='folder' favorite={favorite} />
             <ShareElement typeShare={typeShare} />
             <span className="folder-content">
