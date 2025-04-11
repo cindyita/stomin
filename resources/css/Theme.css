@@ -241,7 +241,7 @@ a {
 }
 @media (max-width: 768px) {
   .folder .options, .file .options {
-    top: 19px;
+    top: 25px;
   }
 }
 .folder:hover, .file:hover {
@@ -276,7 +276,53 @@ a {
 }
 @media (max-width: 768px) {
   .folder .title, .file .title {
-    max-width: 70%;
+    max-width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .file .options, .file .favoriteElement {
+    top: 23px;
+  }
+}
+
+.folder-content, .file-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.folder-content .element-more-info, .file-content .element-more-info {
+  display: none;
+}
+@media (max-width: 768px) {
+  .folder-content, .file-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .folder-content .element-more-info, .file-content .element-more-info {
+    padding-right: 2rem;
+  }
+}
+
+.folder-content-link, .file-content-link {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .folder-content-link, .file-content-link {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 6px;
   }
 }
 
@@ -315,7 +361,7 @@ a {
 
 @media (max-width: 768px) {
   .favoriteElement {
-    top: 19px;
+    top: 25px;
     left: inherit;
     right: 24px;
     font-size: 12pt;
@@ -329,6 +375,62 @@ a {
     color: var(--text);
   }
 }
+.mode-view-list .folder, .mode-view-list .file {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  padding: 0 17px 5px;
+}
+.mode-view-list .folder .element-more-info, .mode-view-list .file .element-more-info {
+  display: block;
+}
+.mode-view-list .folder span, .mode-view-list .file span {
+  margin-top: 6px;
+}
+.mode-view-list .folder .options, .mode-view-list .file .options {
+  top: 25px;
+}
+.mode-view-list .folder .title, .mode-view-list .file .title {
+  max-width: 70%;
+}
+.mode-view-list .folder .folder-content-link, .mode-view-list .folder .file-content-link, .mode-view-list .file .folder-content-link, .mode-view-list .file .file-content-link {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 6px;
+}
+.mode-view-list .folder .folder-content, .mode-view-list .folder .file-content, .mode-view-list .file .folder-content, .mode-view-list .file .file-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 2.2em;
+}
+.mode-view-list .folder .file-content-link, .mode-view-list .file .file-content-link {
+  padding: 6px 0;
+}
+.mode-view-list .favoriteElement {
+  top: 25px;
+  left: inherit;
+  right: 24px;
+  font-size: 12pt;
+}
+.mode-view-list .shareElement {
+  top: inherit;
+  bottom: 2px;
+  left: 7px;
+  font-size: 18pt;
+  opacity: 0.2;
+  color: var(--text);
+}
+.mode-view-list .element {
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .sidebar {
     padding: 10px;
@@ -450,7 +552,7 @@ a {
   background: var(--fontBox) !important;
   border: 2px solid var(--primary) !important;
   color: var(--primary);
-  padding: 3px 7px 4px;
+  padding: 3px 8px 5px;
 }
 .btn.btn-search:hover {
   color: var(--secondary) !important;
@@ -660,6 +762,12 @@ a {
 }
 
 /*------------------------------------*/
+.table, .table th, .table td {
+  background-color: transparent;
+  color: var(--text);
+}
+
+/*------------------------------------*/
 .min-100 {
   min-height: 100%;
 }
@@ -670,6 +778,11 @@ a {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.w-min {
+  width: -moz-min-content;
+  width: min-content;
 }
 
 /*------------------------------------*/

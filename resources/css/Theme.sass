@@ -218,7 +218,7 @@ a
             padding: 2px 5px
 
         @media (max-width: 768px)
-            top: 19px
+            top: 25px
 
     &:hover
         background-color: var(--tertiary)
@@ -251,7 +251,46 @@ a
         font-size: 11pt
 
         @media (max-width: 768px)
-            max-width: 70%
+            max-width: 60%
+
+.file
+    @media (max-width: 768px)
+        .options,.favoriteElement
+            top: 23px
+
+.folder-content,.file-content
+    width: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    .element-more-info
+        display: none
+    
+    @media (max-width: 768px)
+        width: 100%
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        align-items: center
+
+        .element-more-info
+            padding-right: 2rem
+
+.folder-content-link,.file-content-link
+    width: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    @media (max-width: 768px)
+        flex-direction: row
+        justify-content: flex-start
+        align-items: center
+        gap: 0.5rem
+        padding-bottom: 6px
 
 .favoriteElement,.shareElement
     font-size: 12pt
@@ -283,7 +322,7 @@ a
 
 @media (max-width: 768px)
     .favoriteElement
-        top: 19px
+        top: 25px
         left: inherit
         right: 24px
         font-size: 12pt
@@ -294,6 +333,62 @@ a
         font-size: 18pt
         opacity:0.2
         color: var(--text)
+
+//MODE VIEW IN LIST
+.mode-view-list
+    .folder, .file
+        flex-direction: row
+        justify-content: flex-start
+        align-items: center
+        gap: 10px
+        padding: 0 17px 5px
+
+        .element-more-info
+            display: block
+
+        span
+            margin-top: 6px
+
+        .options
+            top: 25px
+
+        .title
+            max-width: 70%
+    
+        .folder-content-link,.file-content-link
+            display: flex
+            flex-direction: row
+            justify-content: flex-start
+            align-items: center
+            gap: 0.5rem
+            padding-bottom: 6px
+        
+        .folder-content,.file-content
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+            align-items: center
+            width: 100%
+            padding-right: 2.2em
+        
+        .file-content-link
+            padding: 6px 0
+
+    .favoriteElement
+        top: 25px
+        left: inherit
+        right: 24px
+        font-size: 12pt
+    .shareElement
+        top: inherit
+        bottom: 2px
+        left: 7px
+        font-size: 18pt
+        opacity:0.2
+        color: var(--text)
+
+    .element
+        width: 100%
 
 //Sidebar mobile
 @media (max-width: 768px)
@@ -402,7 +497,7 @@ a
     background: var(--fontBox) !important
     border: 2px solid var(--primary) !important
     color: var(--primary)
-    padding: 3px 7px 4px
+    padding: 3px 8px 5px
 
     &:hover
         color: var(--secondary) !important
@@ -573,6 +668,11 @@ a
     @media (max-width: 350px)
         width: 100%
 /*------------------------------------*/
+// TABLE
+.table, .table th, .table td
+    background-color: transparent
+    color: var(--text)
+/*------------------------------------*/
 // ESPECIAL CLASS
 .min-100
     min-height: 100%
@@ -582,6 +682,9 @@ a
 
 .cursor-pointer
     cursor: pointer
+
+.w-min
+    width: min-content
 
 /*------------------------------------*/
 // ANIMATIONS

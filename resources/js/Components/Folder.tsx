@@ -32,15 +32,21 @@ export default function Folder({ children,id, color, href, favorite = false, typ
             <ElementDropdown idItem={id} type='folder' />
             <FavoriteElement id={id} type='folder' favorite={favorite} />
             <ShareElement typeShare={typeShare} />
-            <Link href={href} onClick={(e) => {
-                    e.preventDefault();
-                    handleClick(e);
-                }} onDoubleClick={handleDoubleClick} className="d-flex flex-row flex-md-column align-items-center gap-2 gap-md-0">
-                <div className={`icon ${color}`}>
-                    <IoFolder />
+            <span className="folder-content">
+                <Link href={href} onClick={(e) => {
+                        e.preventDefault();
+                        handleClick(e);
+                        }} onDoubleClick={handleDoubleClick}
+                        className="folder-content-link">
+                    <div className={`icon ${color}`}>
+                        <IoFolder />
+                    </div>
+                    <span className="title" title={children}>{children}</span>
+                </Link>
+                <div className="element-more-info text-muted">
+                    <></>
                 </div>
-                <span className="title" title={children}>{children}</span>
-            </Link>
+            </span>
         </div>
     );
 }

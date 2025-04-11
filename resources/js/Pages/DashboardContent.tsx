@@ -5,7 +5,7 @@ import { Button, Collapse, Spinner } from 'react-bootstrap';
 // AXIOS
 import axios from "axios";
 // ICONS
-import { FaMagnifyingGlass } from 'react-icons/fa6';
+import { FaMagnifyingGlass, FaRectangleList } from 'react-icons/fa6';
 // LAYOUTS
 import MainLayout from '@/Layouts/MainLayout';
 // COMPONENTS
@@ -16,6 +16,7 @@ import File from '@/Components/File';
 import UploadFilesModal from '@/Components/UploadFilesModal';
 import UploadFolderModal from '@/Components/UploadFolderModal';
 import InfoCardModal from '@/Components/InfoCardModal';
+import { RiGalleryView2, RiTableView } from 'react-icons/ri';
 
 export default function DashboardContent({ alert = '' }: any) {
     
@@ -31,6 +32,23 @@ export default function DashboardContent({ alert = '' }: any) {
     const maxSizeFiles: number = dataTypeAccount.max_size_files;
     const typeFiles: string[] = usePage().props.typeFiles ?? [];
     const levelFiles = dataTypeAccount['max_level_files'];
+
+    // MODE VIEW
+    const actualModeView = localStorage.getItem('mode-view') || 'mode-view-box';
+    const [modeView, setModeView] = useState<string>(actualModeView);
+    let iconModeView = actualModeView == 'mode-view-box' ? <RiTableView /> : <RiGalleryView2 /> ;
+
+    const changeModeView = () => {
+        if (modeView == 'mode-view-box') {
+            setModeView('mode-view-list');
+            localStorage.setItem('mode-view', 'mode-view-list');
+            iconModeView = <RiGalleryView2 />;
+        } else if (modeView == 'mode-view-list') {
+            setModeView('mode-view-box');
+            localStorage.setItem('mode-view', 'mode-view-box');
+            iconModeView = <RiTableView />;
+        }
+    }
 
     // ALERTS
     const [alerts, setAlerts] = useState<JSX.Element[]>([]);
@@ -140,26 +158,34 @@ export default function DashboardContent({ alert = '' }: any) {
                             );
                         })}
                     </div>
-                    <div className="d-flex gap-2 align-items-start">
-                        <div className="mt-1"><Button className="btn-search"
-                            onClick={() => setSearchCollapse(!searchCollapse)}
-                            aria-controls="example-collapse-text"
-                            aria-expanded={searchCollapse}
-                        ><FaMagnifyingGlass /></Button></div>
-                        <Collapse in={searchCollapse} dimension="width">
-                            <div id="example-collapse-text"><div className="content-input-collapse"><input type="text" className="form-control" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} /></div></div>
-                        </Collapse>
+                    <div className="d-flex gap-2 align-items-end">
+                        <span className="d-flex gap-2 align-items-start">
+                            <div className="mt-1"><Button className="btn-search"
+                                onClick={() => setSearchCollapse(!searchCollapse)}
+                                aria-controls="example-collapse-text"
+                                aria-expanded={searchCollapse}
+                            ><FaMagnifyingGlass /></Button></div>
+                            <Collapse in={searchCollapse} dimension="width">
+                                <div id="example-collapse-text"><div className="content-input-collapse"><input type="text" className="form-control" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} /></div></div>
+                            </Collapse>
+                        </span>
+                        <span>
+                            <button className="mt-1 btn btn-search" onClick={changeModeView}>
+                                {iconModeView}
+                            </button>
+                        </span>
                     </div>
                 </div>
 
                 {/** CONTENT FOLDERS AND FILES */}
-                <div className="content">
+                <div className={`content ${modeView}`}>
                     {loading && <Spinner animation="border" role="status" size="sm">
                         <span className="visually-hidden">Loading...</span>
                     </Spinner>}
 
                     {!loading && (
                         <>
+                            
                             {/* FOLDERS */}
                             {(searchTerm === "" ? folders : filteredFolders).length > 0 ? (
                                 (searchTerm === "" ? folders : filteredFolders).map((folder:any, i:number) => (
